@@ -1,0 +1,10 @@
+<h2>User</h2>
+<% @user.each do |f| %>
+  <%= image_tag @user.get_image %>
+  <p>name<%= @user.name %></p>
+  <p>introduction<%= @user.introduction %></p>
+  <% if @user.user == Current.user %>
+    <%= link_to "削除", post_image_path(@post_image), data: { turbo_method: :delete } %>
+  <% end %>
+
+<% end %>
