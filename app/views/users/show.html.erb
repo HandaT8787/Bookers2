@@ -1,10 +1,25 @@
 <div>
+  <%= tag.div(flash[:alert]) if flash[:alert] %>
+  <%= tag.div(flash[:notice]) if flash[:notice] %>
   <div>
-    <h2>User info</h2>
-    <%= image_tag @user.get_profile_image(100,100) %>
-    <p>name<%= @user.name %></p>
-    <p>introduction<%= @user.introduction %></p>
-    
+    <div>
+      <h2>User info</h2>
+      <%= image_tag @user.get_profile_image(100,100) %>
+      <p>name<%= @user.name %></p>
+      <p>introduction<%= @user.introduction %></p>
+      <% if @user == Current.user %>
+        <p>
+          <%= link_to edit_user_path do %>
+            <i class="fa-solid fa-user-gear"></i>
+          <% end %>
+        </p>
+      <% end %>
+    </div>
+    <div>
+      <h2>New book</h2>
+    </div>
   </div>
-<h2>New book</h2>
-<h2>Books</h2>
+  <div>
+    <h2>Books</h2>
+  </div>
+</div>

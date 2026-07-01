@@ -1,13 +1,13 @@
 class User < ApplicationRecord
-  has_secure_password
+  has_secure_password validations: false
   has_many :sessions, dependent: :destroy
   has_many :books, dependent: :destroy
 
   has_one_attached :profile_image
 
-  validates :name, presence: true, length: { minimum: 2 }
+  validates :name, length: { minimum: 2 }, uniqueness: true
   validates :email_address, presence: true, uniqueness: true
-  validates :password, presence: true, length: { minimum: 6 } 
+  validates :password, presence: true, length: { minimum: 6, allow_blank: true }, if: -> { new_record? || !password.nil? }
 
   normalizes :email_address, with: ->(e) { e.strip.downcase }
 

@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   resource :session, path: "users/sign_in", path_names: { new: ""}
-  resources :users, only: [:new, :create, :index, :show, :edit], path_names: {new: 'sign_up'}
+  resources :users, only: [:new, :create, :index, :show, :edit, :update], path_names: {new: 'sign_up'} do
+    resources :books, only: [:new, :create]
+  end
   get "homes/about", to: "homes#about"
 
   resources :passwords, param: :token
