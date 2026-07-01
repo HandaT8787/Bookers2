@@ -37,13 +37,13 @@
       </li>
       <% if authenticated? %>
         <li>
-          <%= link_to session_path do %>
-            <i class="fa-solid fa-users"></i> User
+          <%= link_to users_path do %>
+            <i class="fa-solid fa-users"></i> Users
           <% end %>
         </li>
         <li>
-          <%= link_to session_path do %>
-            <i class="fa-solid fa-book-open"></i> Book
+          <%= link_to books_path do %>
+            <i class="fa-solid fa-book-open"></i> Books
           <% end %>
         </li>
         <li>

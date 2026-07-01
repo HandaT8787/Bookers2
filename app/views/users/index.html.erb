@@ -1,10 +1,56 @@
-<h2>User</h2>
-<% @user.each do |f| %>
-  <%= image_tag @user.get_image %>
+<div>
+  <h2>User info</h2>
+  <%= image_tag @user.get_profile_image(100,100) %>
   <p>name<%= @user.name %></p>
   <p>introduction<%= @user.introduction %></p>
-  <% if @user.user == Current.user %>
-    <%= link_to "削除", post_image_path(@post_image), data: { turbo_method: :delete } %>
-  <% end %>
+  <p>
+    <% if @user == Current.user %>
+      <%= link_to edit_user_path(Current.user) do %>
+        <i class="fa-solid fa-user-gear"></i>
+      <% end %>
+    <% else %>
+      <%= link_to user_path(Current.user) do %>
+        <i class="fa-solid fa-user-gear"></i>
+      <% end %>
+    <% end %>
+  </p>
+</div>
+<div>
+  <h2>New book</h2>
+  <%= form_with model: @book, url: books_path do |f| %>
+    <div class="field">
+      <%= f.label :title %><br>
+      <%= f.text_field :title %>
+    </div>
 
-<% end %>
+    <div class="field">
+      <%= f.label :body, "Opinion" %><br>
+      <%= f.text_area :body %>
+    </div>
+
+    <div class="actions">
+      <%= f.submit "Create Book" %>
+    </div>
+  <% end %>
+</div>
+<h2>User</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>image</th>
+          <th>name</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @users.each do |user| %>
+          <tr>
+            <td>
+              <%= image_tag user.get_profile_image(100,100) %>
+            </td>
+            <td><%= user.name %></td>
+            <td><%= link_to "Show", user_path(user.id) %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>

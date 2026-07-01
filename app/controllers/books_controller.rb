@@ -1,24 +1,25 @@
 class BooksController < ApplicationController
-  def new
-    @book = Book.new
-  end
 
   def create
     @book = Book.new(book_params)
+    @book.user_id = Current.user.id
     if @book.save
       redirect_to book_path(@book.id), notice: "You have created book successfully."
     else
-      render :show, status: :unprocessable_entity
+      redirect_to books_path, flash: { errors: @book.errors.full_messages }
     end
   end
 
   def index
-    @books = Book.all
+    @books = Book.includes(:user).all
     @book = Book.new
+    @user = Current.user
   end
 
   def show
     @book = Book.find(params[:id])
+    @new_book = Book.new
+    @user = @book.user
   end
 
   def destroy
