@@ -1,4 +1,5 @@
 class BooksController < ApplicationController
+before_action :is_matching_login_user, only: [:edit, :update]
 
   def create
     @book = Book.new(book_params)
@@ -12,7 +13,7 @@ class BooksController < ApplicationController
 
   def index
     @books = Book.includes(:user).all
-    @book = Book.new
+    @new_book = Book.new
     @user = Current.user
   end
 
@@ -20,6 +21,20 @@ class BooksController < ApplicationController
     @book = Book.find(params[:id])
     @new_book = Book.new
     @user = @book.user
+  end
+
+  def edit
+    @book = Book.find(params[:id])
+  end
+
+  def update
+    @book = Book.find(params[:id])
+    if @book.update(book_params)
+      flash[:notice] = "You have updated book successfully."
+      redirect_to book_path(@book.id)
+    else
+      render :edit, status: :unprocessable_entity
+    end
   end
 
   def destroy
@@ -31,6 +46,14 @@ class BooksController < ApplicationController
   private
 
   def book_params
-    params.require(:book).permit(:title, :body, :image)
+    params.require(:book).permit(:title, :body)
   end
+
+  def is_matching_login_user
+    user = User.find(params[:id])
+    unless user.id == Current.user.id
+      redirect_to user_path(user.id)
+    end
+  end
+
 end

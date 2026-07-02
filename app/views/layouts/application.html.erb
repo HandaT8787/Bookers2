@@ -22,58 +22,69 @@
 
     <script src="https://kit.fontawesome.com/53b57606ef.js" crossorigin="anonymous"></script>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-64UC4BEhTGwk3eGpak4nO2jqtl7liTS+juXkSJ2gPAQPmlClQO7s5UgCeR6US48g" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
 
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
+  <body class="d-flex flex-column vh-100">
     <header>
-      <p><%= link_to "Bookers", root_path %></p>
-      <li>
-        <%= link_to root_path do %>
-          <i class="fa-solid fa-house"></i> Home
-        <% end %>
-      </li>
-      <% if authenticated? %>
-        <li>
-          <%= link_to users_path do %>
-            <i class="fa-solid fa-users"></i> Users
-          <% end %>
-        </li>
-        <li>
-          <%= link_to books_path do %>
-            <i class="fa-solid fa-book-open"></i> Books
-          <% end %>
-        </li>
-        <li>
-          <%= link_to session_path, data: { turbo_method: :delete } do %>
-            <i class="fa-solid fa-right-from-bracket"></i> Log out
-          <% end %>
-        </li>
-      <% else %>
-        <li>
-          <%= link_to homes_about_path do %>
-            <i class="fa-solid fa-link"></i> About
-          <% end %>
-        </li>
-        <li>
-          <%= link_to new_user_path do %>
-            <i class="fa-solid fa-user-plus"></i> Sign up
-          <% end %>
-        </li>
-        <li>
-          <%= link_to new_session_path do %>
-            <i class="fa-solid fa-right-to-bracket"></i> Log in
-          <% end %>
-        </li>
-      <% end %>
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container col-xl-7">
+          <a class="navbar-brand text-white" href="/">Bookers</a>
+          <button class="navbar-toggler shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+              <li class="nav-item">
+                <%= link_to root_path, class: "nav-link" do %>
+                  <i class="fa-solid fa-house"></i> Home
+                <% end %>
+              </li>
+              <% if authenticated? %>
+                <li class="nav-item">
+                  <%= link_to users_path, class: "nav-link" do %>
+                    <i class="fa-solid fa-users"></i> Users
+                  <% end %>
+                </li>
+                <li class="nav-item">
+                  <%= link_to books_path, class: "nav-link" do %>
+                    <i class="fa-solid fa-book-open"></i> Books
+                  <% end %>
+                </li>
+                <li class="nav-item">
+                  <%= link_to session_path, class: "nav-link", data: { turbo_method: :delete } do %>
+                    <i class="fa-solid fa-right-from-bracket"></i> Log out
+                  <% end %>
+                </li>
+              <% else %>
+                <li class="nav-item">
+                  <%= link_to homes_about_path, class: "nav-link" do %>
+                    <i class="fa-solid fa-link"></i> About
+                  <% end %>
+                </li>
+                <li class="nav-item">
+                  <%= link_to new_user_path, class: "nav-link" do %>
+                    <i class="fa-solid fa-user-plus"></i> Sign up
+                  <% end %>
+                </li>
+                <li class="nav-item">
+                  <%= link_to new_session_path, class: "nav-link" do %>
+                    <i class="fa-solid fa-right-to-bracket"></i> Log in
+                  <% end %>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      </nav>
     </header>
     <%= yield %>
-    <footer>
-      <p>CopyRight Infratop.inc</p>
+    <footer class="mt-5">
+      <p class="text-center">CopyRight Infratop.inc</p>
     </footer>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.min.js" integrity="sha384-L0XZBFD+a5R/Q+jXRJXW+YY6nKl+MBLAye9ktyaUBtVGzgUqd6RLzfYvnkfwyaJV" crossorigin="anonymous"></script>
   </body>
 </html>

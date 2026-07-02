@@ -5,7 +5,8 @@ class User < ApplicationRecord
 
   has_one_attached :profile_image
 
-  validates :name, length: { minimum: 2 }, uniqueness: true
+  validates :name, length: { in: 2..20 }, uniqueness: true
+  validates :introduction, length: { maximum: 50 }
   validates :email_address, presence: true, uniqueness: true
   validates :password, presence: true, length: { minimum: 6, allow_blank: true }, if: -> { new_record? || !password.nil? }
 

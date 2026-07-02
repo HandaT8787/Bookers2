@@ -3,48 +3,20 @@
   <%= tag.div(flash[:notice]) if flash[:notice] %>
 </div>
 
-<div>
-  <h2>User info</h2>
-  <%= image_tag @user.get_profile_image(100,100) %>
-  <p>name<%= @user.name %></p>
-  <p>introduction<%= @user.introduction %></p>
-  <p>
-    <% if @user == Current.user %>
-      <%= link_to edit_user_path(Current.user) do %>
-        <i class="fa-solid fa-user-gear"></i>
-      <% end %>
-    <% else %>
-      <%= link_to user_path(Current.user) do %>
-        <i class="fa-solid fa-user-gear"></i>
-      <% end %>
-    <% end %>
-  </p>
-</div>
-<div>
-  <h2>New book</h2>
-  <%= form_with model: @new_book, url: books_path do |f| %>
-    <div class="field">
-      <%= f.label :title %><br>
-      <%= f.text_field :title %>
-    </div>
-    <div class="field">
-      <%= f.label :body, "Opinion" %><br>
-      <%= f.text_area :body %>
-    </div>
-    <div class="actions">
-      <%= f.submit "Create Book" %>
-    </div>
-  <% end %>
-</div>
+<%= render 'title', user: @user, new_book: @new_book %>
+
 <h2>Book detail</h2>
 <div class="show-contents">
-  <%= image_tag @book.user.get_profile_image(100,100) %>
+  <%= link_to user_path(@book.user) do %>
+    <%= image_tag @book.user.get_profile_image(100,100) %>
+    <%= @book.user.name %>
+  <% end %>
   <span><%= @book.title %></span>
   <span><%= @book.body %></span>
 </div>
 <% if @user == Current.user %>
   <div class="edit-button">
-    <%= link_to "Edit", books_path %>
+    <%= link_to "Edit", edit_book_path(@book.id) %>
     <%= link_to "Destroy", books_path, data: { turbo_method: :delete, turbo_confirm: "本当に消しますか？"} %>
   </div>
 <% end %>
