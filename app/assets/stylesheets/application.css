@@ -27,6 +27,39 @@ h1 {
   font-size: 2.5rem !important;
 }
 
+strong {
+  font-family: sans-serif;
+  font-weight: 900 !important;
+}
+
 p {
   line-height: 2.5;
+}
+
+.btn {
+  font-size: 14px !important;
+}
+
+.btn-signup {
+  background-color: #47b347 !important;
+  border-color: #47b347 !important;
+}
+
+.btn-signup:hover {
+  background-color: green !important;
+  border-color: green !important;
+}
+
+.btn-login {
+  background-color: #47a1b3 !important;
+border-color: #47a1b3 !important;
+}
+
+.btn-login:hover {
+  background-color: darkcyan !important;
+  border-color: darkcyan !important;
+}
+
+.p-text {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }

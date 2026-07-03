@@ -1,33 +1,39 @@
-<div>
+<div class="col-3">
   <h2>User info</h2>
   <%= image_tag user.get_profile_image(100,100) %>
-  <p>name<%= user.name %></p>
-  <p>introduction<%= user.introduction %></p>
-  <p>
+  <table class="table table-borderless">
+    <tr class="border-top">
+      <th class="py-3">name</th>
+      <td class="fw-bold py-3"><%= user.name %></td>
+    </tr>
+    <tr class="border-top">
+      <th class="py-3">introduction</th>
+      <td class="fw-bold py-3"><%= user.introduction %></td>
+    </tr>
+  </table>
+  <div class="row">
     <% if user == Current.user %>
-      <%= link_to edit_user_path(Current.user) do %>
+      <%= link_to edit_user_path(Current.user), class: "btn btn-outline-secondary w-100 mx-n2" do %>
         <i class="fa-solid fa-user-gear"></i>
       <% end %>
     <% else %>
-      <%= link_to user_path(Current.user) do %>
+      <%= link_to user_path(Current.user), class: "btn btn-outline-secondary w-100 mx-n2" do %>
         <i class="fa-solid fa-user-gear"></i>
       <% end %>
     <% end %>
-  </p>
-</div>
-<div>
-  <h2>New book</h2>
+  </div>
+  <h2 class="mt-4">New book</h2>
   <%= form_with model: new_book, url: books_path do |f| %>
-    <div class="field">
-      <%= f.label :title %><br>
-      <%= f.text_field :title %>
+    <div class="mb-2">
+      <%= f.label :title, class: "mb-2" %><br>
+      <%= f.text_field :title, class: "rounded-1 border-1 border-secondary-subtle form-control" %>
     </div>
-    <div class="field">
-      <%= f.label :body, "Opinion" %><br>
-      <%= f.text_area :body %>
+    <div class="mb-3">
+      <%= f.label :body, "Opinion", class: "mb-2" %><br>
+      <%= f.text_area :body, class: "rounded-1 border-1 border-secondary-subtle form-control" %>
     </div>
-    <div class="actions">
-      <%= f.submit "Create Book" %>
+    <div>
+      <%= f.submit "Create Book", class: "btn btn-signup text-white rounded-1 fs-6" %>
     </div>
   <% end %>
 </div>

@@ -1,32 +1,35 @@
-<div>
-  <%= tag.div(flash[:alert]) if flash[:alert] %>
-  <%= tag.div(flash[:notice]) if flash[:notice] %>
+<%= tag.div(flash[:alert]) if flash[:alert] %>
+<%= tag.div(flash[:notice]) if flash[:notice] %>
 
-  <%= render 'books/title', user: @user, new_book: @new_book %>
-  
-  <div>
-    <h2>Books</h2>
-      <table>
-        <thead>
-          <tr>
-            <th></th>
-            <th>Title</th>
-            <th>Opinion</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @books.each do |book| %>
-            <tr>
-              <td>
-                <%= link_to user_path(book.user) do %>
-                  <%= image_tag book.user.get_profile_image(100,100) %>
-                <% end %>
-              </td>
-              <td><%= link_to book.title, book_path(book.id) %></td>
-              <td><%= book.body %></td>
+<div class="container mt-3">
+  <div class="row justify-content-between">
+    <%= render 'books/title', user: @user, new_book: @new_book %>
+
+    <div class="col-8">
+      <h2>Books</h2>
+        <table class="table table-hover table-borderless">
+          <thead class="border-top">
+            <tr class=" border-2 border-top-0 border-end-0 border-start-0">
+              <th></th>
+              <th class="fw-bold">Title</th>
+              <th class="fw-bold">Opinion</th>
+              <th></th>
             </tr>
-          <% end %>
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            <% @books.each do |book| %>
+              <tr>
+                <td class="p-2 border-top">
+                  <%= link_to user_path(book.user) do %>
+                    <%= image_tag book.user.get_profile_image(80,80) %>
+                  <% end %>
+                </td>
+                <td class="border-top"><%= link_to book.title, book_path(book.id), class: "link-underline link-underline-opacity-0 link-underline-opacity-100-hover" %></td>
+                <td class="border-top"><%= book.body %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+    </div>
   </div>
 </div>

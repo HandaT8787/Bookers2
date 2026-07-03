@@ -1,13 +1,18 @@
 <%= tag.div(flash[:alert], style: "color:red") if flash[:alert] %>
 <%= tag.div(flash[:notice], style: "color:green") if flash[:notice] %>
-<h1>Log in</h1>
-<%= form_with url: session_path do |form| %>
-  <%= form.label :name %><br>
-  <%= form.text_field :name, required: true, autofocus: true, autocomplete: "username", value: params[:name] %><br>
-  <%= form.label :password %><br>
-  <%= form.password_field :password, required: true, autocomplete: "current-password" %><br>
-  <%= form.submit "Log in" %>
-<% end %>
-<%= link_to "Sing up", new_user_path %>
-<br>
-<%= link_to "Forgot password?", new_password_path %>
+
+<div class="container p-0 mt-3">
+  <h2>Log in</h2>
+  <%= form_with url: session_path do |form| %>
+    <%= form.label :name, class: "mb-2" %><br>
+    <%= form.text_field :name, required: true, autofocus: true, autocomplete: "username", value: params[:name] %><br>
+    <%= form.label :password, class: "mb-2" %><br>
+    <%= form.password_field :password, required: true, autocomplete: "current-password" %><br>
+    <%= form.check_box :remember_me %>
+    <%= form.label :remember_me, "Remember me", class: "mb-2" %><br>
+    <%= form.submit "Log in", class: "btn btn-primary rounded-1 px-2" %>
+  <% end %>
+  <%= link_to "Sing up", new_user_path, class: "link-underline link-underline-opacity-0 link-underline-opacity-100-hover" %>
+  <br>
+  <%= link_to "Forgot your password?", new_password_path, class: "link-underline link-underline-opacity-0 link-underline-opacity-100-hover" %>
+</div>

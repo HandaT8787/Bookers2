@@ -1,23 +1,30 @@
-<%= render 'books/title', user: @user, new_book: @new_book %>
+<div class="container mt-3">
+  <div class="row justify-content-between">
 
-<h2>User</h2>
-    <table>
-      <thead>
-        <tr>
-          <th>image</th>
-          <th>name</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @users.each do |user| %>
-          <tr>
-            <td>
-              <%= image_tag user.get_profile_image(100,100) %>
-            </td>
-            <td><%= user.name %></td>
-            <td><%= link_to "Show", user_path(user.id) %></td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
+    <%= render 'books/title', user: @user, new_book: @new_book %>
+
+    <div class="col-8">
+      <h2>User</h2>
+          <table class="table table-borderless">
+            <thead  class="border-top">
+              <tr class="border-2 border-top-0 border-end-0 border-start-0">
+                <th class="px-3 fw-bold">image</th>
+                <th class="fw-bold">name</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @users.each do |user| %>
+                <tr class="border-top">
+                  <td class="p-3">
+                    <%= image_tag user.get_profile_image(80,80) %>
+                  </td>
+                  <td><%= user.name %></td>
+                  <td><%= link_to "Show", user_path(user.id), class: "link-underline link-underline-opacity-0 link-underline-opacity-100-hover" %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+      </div>
+  </div>
+</div>
