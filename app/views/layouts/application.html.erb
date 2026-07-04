@@ -37,12 +37,12 @@
           </button>
           <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
-              <li class="nav-item">
-                <%= link_to root_path, class: "nav-link" do %>
-                  <i class="fa-solid fa-house"></i> Home
-                <% end %>
-              </li>
               <% if authenticated? %>
+                <li class="nav-item">
+                  <%= link_to user_path(Current.user), class: "nav-link" do %>
+                    <i class="fa-solid fa-house"></i> Home
+                  <% end %>
+                </li>
                 <li class="nav-item">
                   <%= link_to users_path, class: "nav-link" do %>
                     <i class="fa-solid fa-users"></i> Users
@@ -60,7 +60,12 @@
                 </li>
               <% else %>
                 <li class="nav-item">
-                  <%= link_to homes_about_path, class: "nav-link" do %>
+                  <%= link_to root_path, class: "nav-link" do %>
+                    <i class="fa-solid fa-house"></i> Home
+                  <% end %>
+                </li>
+                <li class="nav-item">
+                  <%= link_to home_about_path, class: "nav-link" do %>
                     <i class="fa-solid fa-link"></i> About
                   <% end %>
                 </li>

@@ -1,39 +1,44 @@
+<% if flash[:errors] %>
+  <div id="error_explanation">
+    <h2><%= pluralize(flash[:errors].count, "error") %> prohibited this obj from being saved:</h2>
+    <ul>
+      <% flash[:errors].each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
 
-  <% if flash[:errors] %>
-    <div id="error_explanation">
-      <h2><%= pluralize(flash[:errors].count, "error") %> prohibited this obj from being saved:</h2>
-      <ul>
-        <% flash[:errors].each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <%= render 'title', user: @user, new_book: @new_book %>
+<div class="container mt-3">
+  <div class="row justify-content-between" >
+    <%= render 'title', user: @user, new_book: @new_book %>
   
-  <div>
-    <h2>Books</h2>
-    <table>
-      <thead>
-        <tr>
-          <th></th>
-          <th>Title</th>
-          <th>Opinion</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @books.each do |book| %>
-          <tr>
-            <td>
-              <%= link_to user_path(book.user) do %>
-                <%= image_tag book.user.get_profile_image(100,100) %>
-              <% end %>
-            </td>
-            <td><%= link_to book.title, book_path(book.id) %></td>
-            <td><%= book.body %></td>
+    <div class="col-md-8 offset-md-1">
+      <h2>Books</h2>
+      <table class="table table-hover table-borderless">
+        <thead class="border-top">
+          <tr class="border-2 border-top-0 border-end-0 border-start-0">
+            <th class="p-0"></th>
+            <th class="fw-bold p-3">Title</th>
+            <th class="fw-bold w-50 p-3">Opinion</th>
+            <th></th>
           </tr>
-        <% end %>
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          <% @books.each do |book| %>
+            <tr class="border-top">
+              <td class="p-2 pe-3" style="width: 1%;">
+                <%= link_to user_path(book.user) do %>
+                  <%= image_tag book.user.get_profile_image(80,80) %>
+                <% end %>
+              </td>
+              <td class="p-2 px-3"><%= link_to book.title, book_path(book.id), class: "link-underline link-underline-opacity-0 link-underline-opacity-100-hover" %></td>
+              <td class="p-2 px-3"><%= book.body %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
 

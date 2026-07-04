@@ -40,7 +40,7 @@ before_action :is_matching_login_user, only: [:edit, :update]
   def destroy
     book = Book.find(params[:id])
     book.destroy
-    redirect_to book_path
+    redirect_to books_path
   end
 
   private
@@ -52,7 +52,7 @@ before_action :is_matching_login_user, only: [:edit, :update]
   def is_matching_login_user
     user = User.find(params[:id])
     unless user.id == Current.user.id
-      redirect_to user_path(user.id)
+      redirect_to books_path
     end
   end
 

@@ -1,13 +1,10 @@
-<%= tag.div(flash[:alert], style: "color:red") if flash[:alert] %>
-<%= tag.div(flash[:notice], style: "color:green") if flash[:notice] %>
-
 <div class="container p-0 mt-3">
   <h2>Log in</h2>
   <%= form_with url: session_path do |form| %>
     <%= form.label :name, class: "mb-2" %><br>
-    <%= form.text_field :name, required: true, autofocus: true, autocomplete: "username", value: params[:name] %><br>
+    <%= form.text_field :name, required: true, autofocus: true, autocomplete: "username", value: params[:name], class: "px-1" %><br>
     <%= form.label :password, class: "mb-2" %><br>
-    <%= form.password_field :password, required: true, autocomplete: "current-password" %><br>
+    <%= form.password_field :password, required: true, autocomplete: "current-password", class: "px-1" %><br>
     <%= form.check_box :remember_me %>
     <%= form.label :remember_me, "Remember me", class: "mb-2" %><br>
     <%= form.submit "Log in", class: "btn btn-primary rounded-1 px-2" %>

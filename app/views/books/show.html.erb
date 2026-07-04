@@ -5,28 +5,28 @@
   <div class="row justify-content-between">
     <%= render 'title', user: @user, new_book: @new_book %>
 
-    <div class="col-8">
+    <div class="col-md-8 offset-md-1">
       <h2>Book detail</h2>
-      <table class="table table-borderless">
-        <tr>
+      <table class="table table-borderless table-fixed">
+        <tr class="border-top">
           <td>
-            <%= link_to user_path(@book.user) do %>
+            <%= link_to user_path(@book.user), class: "link-underline link-underline-opacity-0 link-underline-opacity-100-hover" do %>
               <%= image_tag @book.user.get_profile_image(100,100) %><br>
               <%= @book.user.name %>
             <% end %>
           </td>
           <td>
-            <%= @book.title %>
+            <%= link_to @book.title, book_path(@book.id), class: "link-underline link-underline-opacity-0 link-underline-opacity-100-hover" %>
           </td>
           <td>
             <%= @book.body %>
           </td>
           <% if @user == Current.user %>
             <td>
-              <%= link_to "Edit", edit_book_path(@book.id) %>
+              <%= link_to "Edit", edit_book_path(@book.id), class: "btn btn-signup text-white rounded-1 px-2 py-1" %>
             </td>
             <td>
-              <%= link_to "Destroy", books_path, data: { turbo_method: :delete, turbo_confirm: "本当に消しますか？"} %>
+              <%= link_to "Destroy", book_path(@book), data: { turbo_method: :delete, turbo_confirm: "本当に消しますか？"}, class: "btn btn-danger text-white rounded-1 px-2 py-1" %>
             </td>
           <% end %>
         </tr>

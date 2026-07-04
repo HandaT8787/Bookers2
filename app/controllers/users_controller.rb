@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   allow_unauthenticated_access only: [:new, :create]
+  before_action :is_matching_login_user, only: [:edit, :update]
 
   def new
     @user = User.new
@@ -8,6 +9,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
+      start_new_session_for @user
       redirect_to user_path(@user.id), notice: "Welcome! You have signed up successfully."
     else
       render :new, status: :unprocessable_entity
@@ -44,5 +46,13 @@ class UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:name, :email_address, :password, :password_confirmation, :profile_image, :introduction)
   end
+
+  def is_matching_login_user
+    user = User.find(params[:id])
+    unless user.id == Current.user.id
+      redirect_to user_path(Current.user.id)
+    end
+  end
+
 
 end

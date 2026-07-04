@@ -1,4 +1,4 @@
-<div class="container mt-3 col-7">
+<div class="container mt-3 col-5">
   <div class="row">
     <h2>User info</h2>
     <% if @user.errors.any? %>
@@ -17,8 +17,8 @@
       <%= f.label :image, class: "mb-2"  %><br>
       <%= f.file_field :profile_image, placeholder: "プロフィール画像", accept: "image/*", class: "mb-3" %><br>
       <%= f.label :introduction, class: "mb-2"  %><br>
-      <%= f.text_area :introduction, class: "border-1 border-secondary-subtle rounded-1 px-2 py-1 w-100 form-control" %><br>
-      <%= f.submit "Update User", class: "btn btn-secondary fs-6 rounded-1" %>
+      <%= f.text_area :introduction, class: "border-1 border-secondary-subtle rounded-1 px-2 py-1 w-100 form-control" %>
+      <%= f.submit "Update User", class: "btn btn-secondary fs-6 rounded-1 mt-3" %>
     <% end %>
   </div>
 </div>

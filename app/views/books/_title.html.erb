@@ -1,4 +1,4 @@
-<div class="col-3">
+<div class="col-md-3">
   <h2>User info</h2>
   <%= image_tag user.get_profile_image(100,100) %>
   <table class="table table-borderless">
@@ -12,14 +12,8 @@
     </tr>
   </table>
   <div class="row">
-    <% if user == Current.user %>
-      <%= link_to edit_user_path(Current.user), class: "btn btn-outline-secondary w-100 mx-n2" do %>
-        <i class="fa-solid fa-user-gear"></i>
-      <% end %>
-    <% else %>
-      <%= link_to user_path(Current.user), class: "btn btn-outline-secondary w-100 mx-n2" do %>
-        <i class="fa-solid fa-user-gear"></i>
-      <% end %>
+    <%= link_to edit_user_path(@user.id), class: "btn btn-outline-secondary w-100 mx-n2" do %>
+      <i class="fa-solid fa-user-gear"></i>
     <% end %>
   </div>
   <h2 class="mt-4">New book</h2>
