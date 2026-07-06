@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
   resource :session
   resources :users, only: [:new, :create, :index, :show, :edit, :update], path_names: {new: 'sign_up'}
-  resources :books
-
+  resources :books do
+    resource :favorite, only: [:create, :destroy]
+    resources :book_comments, only: [:create, :destroy]
+  end
   get 'home/about', to: "homes#about"
 
   resources :passwords, param: :token

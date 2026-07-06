@@ -63,3 +63,7 @@ border-color: #47a1b3 !important;
 .p-text {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
+
+.good {
+  color: red;
+}
