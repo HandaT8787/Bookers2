@@ -26,6 +26,7 @@
                 </td>
                 <td class="border-top"><%= link_to book.title, book_path(book.id), class: "link-underline link-underline-opacity-0 link-underline-opacity-100-hover" %></td>
                 <td class="border-top"><%= book.body %></td>
+                <td class="border-top">コメント数: <%= book.book_comments.count %></td>
               </tr>
             <% end %>
           </tbody>
