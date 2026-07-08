@@ -1,0 +1,19 @@
+<div class="mt-3">
+  <h2></h2>
+  <table class="table table-borderless table-hover">
+    <thead>
+      <tr>
+        <% if params[:search_type] == "book_title" %>
+          <th class="fw-bold">Title</th>
+          <th class="fw-bold">Opinion</th>
+        <% elsif params[:search_type] == "user_name" %>
+          <th class="fw-bold">Name</th>
+          <th class="fw-bold">Introduction</th>
+        <% end %>
+      </tr>
+    </thead>
+    <tbody>
+      <tr></tr>
+    </tbody>
+  </table>
+</div>

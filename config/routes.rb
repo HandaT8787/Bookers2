@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   end
   resources :relationships, only: [:create, :destroy]
   get 'home/about', to: "homes#about"
+  get "search", to: "searches#index"
 
   resources :passwords, param: :token
   root "homes#index"

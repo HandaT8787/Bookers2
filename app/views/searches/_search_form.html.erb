@@ -1,0 +1,9 @@
+<%= form_with url: search_path, method: :get, local: true do %>
+  <div class="d-flex gap-2">
+    <%= text_field_tag :keyword, params[:keyword], class="form-control" %>
+    <%= search_tag :search_type, options_for_select([["User", "user_name"], ["Book", "book_title"]], params[:search_type]), class: "form-select w-auto" %>
+    <%= select_tag :match_typ, options_for_select([["完全一致", "exact"], ["前方一致", "prefix"], ["後方一致", "suffix"], ["部分一致", "partial"]], params[:match
+    _type]), class: "form-select w-auto" %>
+    <%= submit_tag "検索" %>
+  </div>
+<% end %>
