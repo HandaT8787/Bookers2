@@ -18,11 +18,11 @@
     <link rel="apple-touch-icon" href="/icon.png">
 
     <%# Includes all stylesheet files in app/assets/stylesheets %>
-    <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
 
     <script src="https://kit.fontawesome.com/53b57606ef.js" crossorigin="anonymous"></script>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
 
     <%= javascript_importmap_tags %>
   </head>
@@ -85,6 +85,9 @@
         </div>
       </nav>
     </header>
+    <% if authenticated? %>
+      <%= render 'searches/search_form' %>
+    <% end %>
     <%= yield %>
     <footer class="mt-5">
       <p class="text-center">CopyRight Infratop.inc</p>

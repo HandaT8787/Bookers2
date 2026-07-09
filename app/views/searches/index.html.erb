@@ -1,8 +1,11 @@
 <div class="mt-3">
-  <h2></h2>
+  <h2>
+    <%= search_target_label %> result for "<%= params[:keyword] %>"
+  </h2>
   <table class="table table-borderless table-hover">
-    <thead>
-      <tr>
+    <thead class="border-top">
+      <tr  class="border-2 border-top-0 border-end-0 border-start-0">
+        <th></th>
         <% if params[:search_type] == "book_title" %>
           <th class="fw-bold">Title</th>
           <th class="fw-bold">Opinion</th>
@@ -13,7 +16,27 @@
       </tr>
     </thead>
     <tbody>
-      <tr></tr>
+      <% @results.each do |result| %>
+        <tr class="border-top">
+          <% if params[:search_type] == "book_title" %>
+            <td>
+              <%= link_to user_path(result.user) do %>
+                <%= image_tag result.user.get_profile_image(50,50) %>
+              <% end %>
+            </td>
+            <td><%= link_to result.title, book_path(result) %></td>
+            <td><%= result.body %></td>
+          <% elsif  params[:search_type] == "user_name" %>
+            <td>
+              <%= link_to user_path(result) do %>
+                <%= image_tag result.get_profile_image(50,50) %>
+              <% end %>
+            </td>
+            <td><%= link_to result.name, user_path(result) %></td>
+            <td><%= result.introduction %></td>
+          <% end %>
+        </tr>
+      <% end %>
     </tbody>
   </table>
 </div>
