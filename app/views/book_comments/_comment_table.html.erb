@@ -1,0 +1,18 @@
+<table class="table table-borderless" id="<%= dom_id(book, :comments) %>">
+  <% book.book_comments.each do |book_comment| %>
+    <tr>
+      <td>
+        <%= link_to user_path(book_comment.user), class: "link-underline link-underline-opacity-0 link-underline-opacity-100-hover" do %>
+          <%= image_tag book_comment.user.get_profile_image(100,100) %><br>
+          <%= book_comment.user.name %>
+        <% end %>
+      </td>
+      <td>
+        <%= book_comment.comment %>
+      </td>
+      <td>
+        <%= render 'book_comments/comment', book: book, book_comment: book_comment %>
+      </td>
+    </tr>
+  <% end %>
+</table>

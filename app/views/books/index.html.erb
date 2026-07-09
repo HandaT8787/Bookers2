@@ -35,19 +35,7 @@
               </td>
               <td class="p-2 px-3"><%= link_to book.title, book_path(book.id), class: "link-underline link-underline-opacity-0 link-underline-opacity-100-hover" %></td>
               <td class="p-2 px-3"><%= book.body %></td>
-              <% if book.favorited_by?(Current.user) %>
-                <td class="p-2 px-3">
-                  <%= link_to book_favorite_path(book), data: { turbo_method: :delete}, class: "link-underline link-underline-opacity-0 link-underline-opacity-100-hover good" do %>
-                    ♥<%= book.favorites.count %>
-                  <% end %>
-                </td>
-              <% else %>
-                <td class="p-2 px-3">
-                  <%= link_to book_favorite_path(book), data: { turbo_method: "post" }, class: "link-underline link-underline-opacity-0 link-underline-opacity-100-hover" do %>
-                    ♥<%= book.favorites.count %>
-                  <% end %>
-                </td>
-              <% end %>
+              <%= render 'favorites/favorite', book: book %>
               <td class="p-2 px-3">
                 コメント数: <%= book.book_comments.count %>
               </td>

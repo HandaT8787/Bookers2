@@ -21,19 +21,7 @@
           <td>
             <%= @book.body %>
           </td>
-          <% if @book.favorited_by?(Current.user) %>
-            <td class="p-2 px-3">
-              <%= link_to book_favorite_path(@book), data: { turbo_method: :delete}, class: "link-underline link-underline-opacity-0 link-underline-opacity-100-hover good" do %>
-                ♥<%= @book.favorites.count %>
-              <% end %>
-            </td>
-          <% else %>
-            <td class="p-2 px-3">
-              <%= link_to book_favorite_path(@book), data: { turbo_method: "post" }, class: "link-underline link-underline-opacity-0 link-underline-opacity-100-hover" do %>
-                ♥<%= @book.favorites.count %>
-              <% end %>
-            </td>
-          <% end %>
+          <%= render 'favorites/favorite', book: @book %>
           <td>
             コメント数: <%= @book.book_comments.count %>
           </td>
@@ -47,26 +35,7 @@
           <% end %>
         </tr>
       </table>
-      <table class="table table-borderless">
-        <% @book.book_comments.each do |book_comment| %>
-          <tr>
-            <td>
-              <%= link_to user_path(book_comment.user), class: "link-underline link-underline-opacity-0 link-underline-opacity-100-hover" do %>
-                <%= image_tag book_comment.user.get_profile_image(100,100) %><br>
-                <%= book_comment.user.name %>
-              <% end %>
-            <td>
-            <td>
-              <%= book_comment.comment %>
-            </td>
-            <td>
-              <% if book_comment.user == Current.user %>
-                <%= link_to "Destroy", book_book_comment_path(@book, book_comment), data: { turbo_method: :delete, turbo_confirm: "本当に消しますか？" }, class: "btn btn-danger text-white rounded-1 px-2 py-1" %>
-              <% end %>
-            </td>
-          </tr>
-        <% end %>
-      </table>
+      <%= render 'book_comments/book_comments', book: @book %>
       <div>
         <%= form_with model: [@book, @book_comment] do |f| %>
           <%= f.text_area :comment, rows: '5', class: "w-100" %><br>

@@ -1,0 +1,3 @@
+<%= turbo_stream.replace dom_id(@book, :comments) do %>
+  <%= render 'book_comments/book_comments', book: @book %>
+<% end %>
