@@ -36,12 +36,7 @@
         </tr>
       </table>
       <%= render 'book_comments/book_comments', book: @book %>
-      <div>
-        <%= form_with model: [@book, @book_comment] do |f| %>
-          <%= f.text_area :comment, rows: '5', class: "w-100" %><br>
-          <%= f.submit "送信" %>
-        <% end %>
-      </div>
+      <%= render 'book_comments/form', book: @book, book_comment: @book_comment %>
     </div>
   </div>
 </div>

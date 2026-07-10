@@ -2,6 +2,6 @@
   <%= render 'book_comments/book_comments', book: @book %>
 <% end %>
 
-<% turbo_stream.replace "new_book_comment" do %>
+<%= turbo_stream.replace "new_book_comment" do %>
   <%= render 'book_comments/form', book: @book, book_comment: Current.user.book_comments.new %>
 <% end %>
