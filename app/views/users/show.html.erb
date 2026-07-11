@@ -7,30 +7,75 @@
 
     <div class="col-md-8 offset-md-1">
       <h2>Books</h2>
-        <table class="table table-hover table-borderless">
-          <thead class="border-top">
-            <tr class=" border-2 border-top-0 border-end-0 border-start-0">
-              <th></th>
-              <th class="fw-bold">Title</th>
-              <th class="fw-bold">Opinion</th>
-              <th></th>
+      <table class="table table-hover table-borderless">
+        <thead class="border-top">
+          <tr class=" border-2 border-top-0 border-end-0 border-start-0">
+            <th></th>
+            <th class="fw-bold">Title</th>
+            <th class="fw-bold">Opinion</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @books.each do |book| %>
+            <tr>
+              <td class="p-2 border-top">
+                <%= link_to user_path(book.user) do %>
+                  <%= image_tag book.user.get_profile_image(80,80) %>
+                <% end %>
+              </td>
+              <td class="border-top"><%= link_to book.title, book_path(book.id), class: "link-underline link-underline-opacity-0 link-underline-opacity-100-hover" %></td>
+              <td class="border-top"><%= book.body %></td>
+              <td class="border-top">コメント数: <%= book.book_comments.count %></td>
             </tr>
-          </thead>
-          <tbody>
-            <% @books.each do |book| %>
-              <tr>
-                <td class="p-2 border-top">
-                  <%= link_to user_path(book.user) do %>
-                    <%= image_tag book.user.get_profile_image(80,80) %>
-                  <% end %>
-                </td>
-                <td class="border-top"><%= link_to book.title, book_path(book.id), class: "link-underline link-underline-opacity-0 link-underline-opacity-100-hover" %></td>
-                <td class="border-top"><%= book.body %></td>
-                <td class="border-top">コメント数: <%= book.book_comments.count %></td>
-              </tr>
-            <% end %>
-          </tbody>
-        </table>
+          <% end %>
+        </tbody>
+      </table>
+      <h2>投稿数の前日比・前週比</h2>
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>今日の投稿数</th>
+            <th>前日の投稿数</th>
+            <th>前日比</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><%= @today_count %></td>
+            <td><%= @yesterday_count %></td>
+            <td>
+              <% if @percentage_of_yesterday.nil? %>
+                <span>―</span>
+              <% else %>
+                <span><%= @percentage_of_yesterday %>%</span>
+              <% end %>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>今週の投稿数</th>
+            <th>前週の投稿数</th>
+            <th>前週比</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><%= @this_week_count %></td>
+            <td><%= @last_week_count %></td>
+            <td>
+              <% if @percentage_of_last_week.nil? %>
+                <span>―</span>
+              <% else %>
+                <span><%= @percentage_of_last_week %>%</span>
+              <% end %>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </div>
