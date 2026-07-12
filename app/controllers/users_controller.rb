@@ -26,13 +26,13 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @books = @user.books
     @new_book = Book.new
-    @today_count = Book.where(created_at: Date.today.all_day).count
-    @yesterday_count = Book.where(created_at: Date.yesterday.all_day).count
-    @this_week_count = Book.where(created_at: 6.days.ago.beginning_of_day..Time.current).count
-    @last_week_count = Book.where(created_at: 13.days.ago.beginning_of_day..7.days.ago.beginning_of_day).count
-
-    @percentage_of_yesterday = calc_percentage(@today_count, @yesterday_count)
-    @percentage_of_last_week = calc_percentage(@this_week_count, @last_week_count)
+    counts = @user.books
+                  .where(created_at: 6.days.ago.beginning_of_day..Time.current)
+                  .group("DATE(created_at)")
+                  .count
+    @daily_counts = (6.days.ago.to_date..Date.current).map do |date|
+      [date, counts[date.to_s] || counts[date] || 0]
+    end
   end
 
   def edit

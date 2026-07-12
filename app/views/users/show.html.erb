@@ -31,26 +31,24 @@
           <% end %>
         </tbody>
       </table>
-      <h2>投稿数の前日比・前週比</h2>
+
+      <h2>7日間分の投稿数</h2>
       <table class="table table-bordered">
         <thead>
           <tr>
-            <th>今日の投稿数</th>
-            <th>前日の投稿数</th>
-            <th>前日比</th>
+            <% @daily_counts.each do |date, count| %>
+              <th>
+                <% days_ago = Date.current - date %>
+                <%= days_ago.zero? ? "今日" : "#{days_ago.to_i}日前" %>
+              </th>
+            <% end %>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td><%= @today_count %></td>
-            <td><%= @yesterday_count %></td>
-            <td>
-              <% if @percentage_of_yesterday.nil? %>
-                <span>―</span>
-              <% else %>
-                <span><%= @percentage_of_yesterday %>%</span>
-              <% end %>
-            </td>
+            <% @daily_counts.each do |date, count| %>
+              <td><%= count %></td>
+            <% end %>
           </tr>
         </tbody>
       </table>
