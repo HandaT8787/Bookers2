@@ -33,6 +33,17 @@ class UsersController < ApplicationController
     @daily_counts = (6.days.ago.to_date..Date.current).map do |date|
       [date, counts[date.to_s] || counts[date] || 0]
     end
+
+    if params[:date].present?
+      begin
+        @selected_date = Date.parse(params[:date])
+        @selected_date_count = @user.books
+                                    .where(created_at: @selected_date.beginning_of_day..@selected_date.end_of_day)
+                                    .count
+      rescue ArgumentError
+        @selected_date = nil
+      end
+    end
   end
 
   def edit
