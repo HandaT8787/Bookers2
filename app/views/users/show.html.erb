@@ -52,28 +52,63 @@
           </tr>
         </tbody>
       </table>
-      <table class="table table-bordered">
-        <thead>
-          <tr>
-            <th>今週の投稿数</th>
-            <th>前週の投稿数</th>
-            <th>前週比</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><%= @this_week_count %></td>
-            <td><%= @last_week_count %></td>
-            <td>
-              <% if @percentage_of_last_week.nil? %>
-                <span>―</span>
-              <% else %>
-                <span><%= @percentage_of_last_week %>%</span>
-              <% end %>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+
+      <canvas id="dailyCountsChart" width="600" height="300"></canvas>
+      <script>
+        document.addEventListener('turbo:load', function(){
+          const canvas = document.getElementById('dailyCountsChart');
+          if (!canvas) return;
+          if (typeof Chart === 'undefined') return;
+
+          const labels = <%= raw @daily_counts.map { |date, count|
+            days_ago = Date.current - date
+            days_ago.zero? ? "今日" : "#{days_ago.to_i}日前"
+          }.to_json %>;
+          const data = <%= raw @daily_counts.map { |date, count| count }.to_json %>;
+          
+          const existingChart = Chart.getChart(canvas);
+          if (existingChart){
+            existingChart.destroy();
+          }
+
+          const ctx = document.getElementById('dailyCountsChart').getContext('2d');
+          new Chart(ctx, {
+            type: 'line',
+            data: {
+              labels: labels,
+              datasets: [{
+                label: '投稿した本の数',
+                data: data,
+                borderColor: 'rgba(0, 0, 255, 1)',
+                backgroundColor: 'rgba(255, 255, 255, 0)',
+                tension: 0.3,
+                fill: true
+              }]
+            },
+            options: {
+              plugins: {
+                title: {
+                  display: true,
+                  text: '7日間の投稿数の比較',
+                  font: { size: 12 }
+                },
+                legend: {
+                  labels: { font: { size: 12 } }
+                }
+              },
+              scales: {
+                y: {
+                  beginAtZero: true,
+                  suggestedMax: 10,
+                  ticks: {
+                    stepSize: 1
+                  }
+                }
+              }
+            }
+          });
+        });
+      </script>
     </div>
   </div>
 </div>
