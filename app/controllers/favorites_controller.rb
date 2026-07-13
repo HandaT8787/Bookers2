@@ -5,6 +5,8 @@ class FavoritesController < ApplicationController
     favorite = Current.user.favorites.new(book_id: @book.id)
     favorite.save
 
+    @books = Book.ranked_by_weekly_favorites
+
     respond_to do |format|
       format.turbo_stream
       format.html { redirect_back fallback_location: books_path }
@@ -16,10 +18,11 @@ class FavoritesController < ApplicationController
     favorite = Current.user.favorites.find_by(book_id: @book.id)
     favorite&.destroy
 
+    @books = Book.ranked_by_weekly_favorites
+
     respond_to do |format|
       format.turbo_stream
       format.html { redirect_back fallback_location: books_path }
     end
   end
-
 end

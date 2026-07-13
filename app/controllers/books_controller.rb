@@ -12,7 +12,8 @@ before_action :is_matching_login_user, only: [:edit, :update]
   end
 
   def index
-    @books = Book.includes(:user).all
+    condition = ["favorites.book_id = books.id AND favorites.created_at >= ?", 1.week.ago]
+    @books = Book.ranked_by_weekly_favorites
     @new_book = Book.new
     @user = Current.user
   end

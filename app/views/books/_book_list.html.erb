@@ -1,0 +1,17 @@
+<tbody id="books_list">
+  <% books.each do |book| %>
+    <tr class="border-top">
+      <td class="p-2 pe-3" style="width: 1%;">
+        <%= link_to user_path(book.user) do %>
+          <%= image_tag book.user.get_profile_image(80,80) %>
+        <% end %>
+      </td>
+      <td class="p-2 px-3"><%= link_to book.title, book_path(book.id), class: "link-underline link-underline-opacity-0 link-underline-opacity-100-hover" %></td>
+      <td class="p-2 px-3"><%= book.body %></td>
+      <%= render 'favorites/favorite', book: book %>
+      <td class="p-2 px-3">
+        コメント数: <%= book.book_comments.count %>
+      </td>
+    </tr>
+  <% end %>
+</tbody>

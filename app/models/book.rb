@@ -11,4 +11,13 @@ class Book < ApplicationRecord
   def favorited_by?(user)
     favorites.exists?(user_id: user.id)
   end
+
+  def self.ranked_by_weekly_favorites
+    condition = ["favorites.book_id = books.id AND favorites.created_at >= ?", 1.week.ago]
+    includes(:user)
+      .joins("LEFT JOIN favorites ON #{sanitize_sql_array(condition)}")
+      .group("books.id")
+      .select("books.*, COUNT(favorites.id) AS favorites_count_this_week")
+      .order("favorites_count_this_week DESC")
+  end
 end
