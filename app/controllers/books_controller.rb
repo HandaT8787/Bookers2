@@ -20,9 +20,12 @@ before_action :is_matching_login_user, only: [:edit, :update]
 
   def show
     @book = Book.find(params[:id])
-    @new_book = Book.new
     @user = @book.user
+    @books = @user.books
+    @new_book = Book.new
     @book_comment = BookComment.new
+
+    @book.views.create
   end
 
   def edit
