@@ -1,0 +1,15 @@
+<div class="container mt-3">
+  <h2 class="mb-3"><%= @partner.name %>さんとのチャット</h2>
+
+  <div id="message_list">
+    <% @messages.each do |message| %>
+      <div class="mb-3 mx-auto <%= message.sender == Current.user ? 'text-start' : 'text-end' %>", style="width: 60%;" >
+        <span class="p-2">
+          <%= message.content %>
+        </span>
+      </div>
+    <% end %>
+  </div>
+
+  <%= render 'messages/form', message: @message, partner: @partner %>
+</div>

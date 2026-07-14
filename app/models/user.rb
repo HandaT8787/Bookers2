@@ -8,6 +8,8 @@ class User < ApplicationRecord
   has_many :following, through: :active_relationships, source: :followed
   has_many :passive_relationships, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
   has_many :followers, through: :passive_relationships, source: :follower
+  has_many :sent_messages, class_name: "Message", foreign_key: "sender_id", dependent: :destroy
+  has_many :received_message, class_name: "Message", foreign_key: "recipient_id", dependent: :destroy
 
   has_one_attached :profile_image
 
@@ -37,5 +39,9 @@ class User < ApplicationRecord
 
   def following?(other_user)
     following.include?(other_user)
+  end
+
+  def mutual_following?(other_user)
+    following?(other_user) && other_user.following?(self)
   end
 end

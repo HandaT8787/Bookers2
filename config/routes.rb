@@ -10,8 +10,10 @@ Rails.application.routes.draw do
     resources :book_comments, only: [:create, :destroy]
   end
   resources :relationships, only: [:create, :destroy]
+  resources :messages, only: [:create]
   get 'home/about', to: "homes#about"
   get "search", to: "searches#index"
+  get "messages/:user_id", to: "messages#show", as: "conversation"
 
   resources :passwords, param: :token
   root "homes#index"
