@@ -5,41 +5,45 @@
 
     <div class="col-md-8 offset-md-1">
       <h2>User</h2>
-          <table class="table table-borderless">
-            <thead class="border-top">
-              <tr class="border-2 border-top-0 border-end-0 border-start-0">
-                <th class="px-3 fw-bold">image</th>
-                <th class="fw-bold">name</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              <% @users.each do |user| %>
-                <tr class="border-top">
-                  <td class="p-3">
-                    <%= image_tag user.get_profile_image(80,80) %>
-                  </td>
-                  <td><%= user.name %></td>
-                  <td>フォロー数: <%= user.following.count %></td>
-                  <td>フォロワー数: <%= user.followers.count %></td>
-                  <% if Current.user != user %>
-                    <% if Current.user.following?(user) %>
-                      <td>
-                        <%= link_to "フォロー外す", relationship_path(Current.user.active_relationships.find_by(followed_id: user.id)), data: { turbo_method: :delete}, class: "link-underline link-underline-opacity-0 link-underline-opacity-100-hover" %>
-                      </td>
-                    <% else %>
-                      <td>
-                        <%= link_to "フォローする", relationships_path(followed_id: user.id), data: { turbo_method: :post}, class: "link-underline link-underline-opacity-0 link-underline-opacity-100-hover" %>
-                      </td>
-                    <% end %>
+      <div class="mb-1">
+        <%= link_to "グループを作成する", new_group_path, class: "link-underline link-underline-opacity-0 link-underline-opacity-100-hover" %> |
+        <%= link_to "グループ一覧", groups_path, class: "link-underline link-underline-opacity-0 link-underline-opacity-100-hover" %>
+      </div>
+        <table class="table table-borderless">
+          <thead class="border-top">
+            <tr class="border-2 border-top-0 border-end-0 border-start-0">
+              <th class="px-3 fw-bold">image</th>
+              <th class="fw-bold">name</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @users.each do |user| %>
+              <tr class="border-top">
+                <td class="p-3">
+                  <%= image_tag user.get_profile_image(80,80) %>
+                </td>
+                <td><%= user.name %></td>
+                <td>フォロー数: <%= user.following.count %></td>
+                <td>フォロワー数: <%= user.followers.count %></td>
+                <% if Current.user != user %>
+                  <% if Current.user.following?(user) %>
+                    <td>
+                      <%= link_to "フォロー外す", relationship_path(Current.user.active_relationships.find_by(followed_id: user.id)), data: { turbo_method: :delete}, class: "link-underline link-underline-opacity-0 link-underline-opacity-100-hover" %>
+                    </td>
                   <% else %>
-                    <td></td>
+                    <td>
+                      <%= link_to "フォローする", relationships_path(followed_id: user.id), data: { turbo_method: :post}, class: "link-underline link-underline-opacity-0 link-underline-opacity-100-hover" %>
+                    </td>
                   <% end %>
-                  <td><%= link_to "Show", user_path(user.id), class: "link-underline link-underline-opacity-0 link-underline-opacity-100-hover" %></td>
-                </tr>
-              <% end %>
-            </tbody>
-          </table>
+                <% else %>
+                  <td></td>
+                <% end %>
+                <td><%= link_to "Show", user_path(user.id), class: "link-underline link-underline-opacity-0 link-underline-opacity-100-hover" %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
     </div>
   </div>
 </div>

@@ -1,0 +1,11 @@
+<% if @group.owner == Current.user %>
+  <div class="container mt-3">
+    <h2>Transfer Owner</h2>
+    <%= form_with url: transfer_ownership_group_path(@group), method: :patch do %>
+      <%= select_tag :new_owner_id,
+            options_for_select(@group.members.where.not(id: @group.owner.id).map { |m| [m.name, m.id] }),
+            class: "form-control w-auto mb-2" %>
+      <%= submit_tag "譲渡", data: { turbo_confirm: "本当に譲渡しますか？"} %>
+    <% end %>
+  </div>
+<% end %>

@@ -11,6 +11,12 @@ Rails.application.routes.draw do
   end
   resources :relationships, only: [:create, :destroy]
   resources :messages, only: [:create]
+  resources :groups do
+    resource :group_user, only:[:create, :destroy]
+    member do
+      patch :transfer_ownership
+    end
+  end
   get 'home/about', to: "homes#about"
   get "search", to: "searches#index"
   get "messages/:user_id", to: "messages#show", as: "conversation"
