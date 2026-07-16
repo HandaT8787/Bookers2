@@ -9,6 +9,8 @@ class GroupsController < ApplicationController
   end
 
   def show
+    @user = Current.user
+    @new_book = Book.new
   end
 
   def new
@@ -32,7 +34,7 @@ class GroupsController < ApplicationController
 
   def update
     if @group.update(group_params)
-      redirect_to @group
+      redirect_to groups_path
     else
       render :edit, status: :unprocessable_entity
     end

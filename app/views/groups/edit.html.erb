@@ -1,0 +1,30 @@
+<div class="container mt-3">
+  <h2>Editing Group</h2>
+  <%= form_with model: @group do |f| %>
+    <% if @group.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@group.errors.count, "error") %> prohibited this group from being saved:</h2>
+        <ul>
+          <% @group.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <div class="mb-3">
+      <%= f.label :name, "グループ名", class: "mb-2" %>
+      <%= f.text_field :name, class: "form-control" %>
+    </div>
+    <div class="mb-3">
+      <%= f.label :introduction, "紹介文", class: "mb-2" %>
+      <%= f.text_area :introduction, class: "form-control" %>
+    </div>
+    <div class="mb-3">
+      <%= f.label :group_image, "グループ画像", class: "mb-2" %><br>
+      <%= f.file_field :group_image, accept: "image/*" %>
+    </div>
+
+    <%= f.submit "Update Group", class: "btn btn-login text-white" %>
+
+  <% end %>
+</div>

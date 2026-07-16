@@ -1,11 +1,32 @@
-<% if @group.owner == Current.user %>
-  <div class="container mt-3">
+<div class="container mt-3">
+  <div class="row justify-content-between">
+    <%= render 'books/title', user: @user, new_book: @new_book %>
+
+    <div class="col-md-8 offset-md-1">
+      <h2>Group Detail</h2>
+      <table class="table table-borderless">
+        <tr class="border-top">
+          <td class="pt-3"><%= image_tag @group.get_group_image(80,80) %></td>
+          <td class="pt-3"><%= @group.name %></td>
+          <td class="pt-3"><%= @group.introduction %></td>
+          <td class="pt-3">
+            <% if @group.owner == Current.user %>
+              <%= link_to "Edit", edit_group_path(@group), class: "btn btn-signup text-white rounded-1" %>
+            <% end %>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+  <% if @group.owner == Current.user %>
     <h2>Transfer Owner</h2>
-    <%= form_with url: transfer_ownership_group_path(@group), method: :patch do %>
-      <%= select_tag :new_owner_id,
-            options_for_select(@group.members.where.not(id: @group.owner.id).map { |m| [m.name, m.id] }),
-            class: "form-control w-auto mb-2" %>
-      <%= submit_tag "譲渡", data: { turbo_confirm: "本当に譲渡しますか？"} %>
-    <% end %>
-  </div>
-<% end %>
+      <%= form_with url: transfer_ownership_group_path(@group), method: :patch do %>
+        <%= select_tag :new_owner_id,
+              options_for_select(@group.members.where.not(id: @group.owner.id).map { |m| [m.name, m.id] }),
+              class: "form-control w-auto mb-2" %>
+        <%= submit_tag "譲渡", data: { turbo_confirm: "本当に譲渡しますか？"} %>
+      <% end %>
+  <% end %>
+
+    
+</div>
