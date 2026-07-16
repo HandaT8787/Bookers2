@@ -12,6 +12,7 @@
             <th class="p-3 fw-bold">紹介文</th>
             <th class="p-3 fw-bold">メンバー</th>
             <th class="p-3"></th>
+            <th class="p-3"></th>
           </tr>
         </thead>
         <tbody>
@@ -31,6 +32,11 @@
                 <%= link_to "Leave this group", group_group_user_path(@group), data: { turbo_method: :delete }, class: "btn btn-danger" %>
               <% else %>
                 <%= link_to "Join this group", group_group_user_path(@group), data: { turbo_method: :post }, class: "btn btn-signup text-white rounded-1" %>
+              <% end %>
+            </td>
+            <td class="p-3">
+              <% if @group.owner == Current.user %>
+                <%= link_to "Notice an Event", new_mail_group_path(@group), class: "btn btn-login text-white rounded-1" %>
               <% end %>
             </td>
           </tr>

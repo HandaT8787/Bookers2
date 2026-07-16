@@ -1,0 +1,16 @@
+<div class="container mt-3">
+  <div class="row justify-content-center">
+    <div class="col-md-6 w-auto">
+      <h2>送信が完了しました</h2>
+      <p>内容は以下の通りです。</p>
+      <div>
+        <span>[タイトル]</span>
+        <p class="lh-1"><%= @subject %></p>
+      </div>
+      <div>
+        <span>[本文]</span>
+        <p class="lh-1"><%= simple_format(@body) %></p>
+      </div>
+    </div>
+  </div>
+</div>

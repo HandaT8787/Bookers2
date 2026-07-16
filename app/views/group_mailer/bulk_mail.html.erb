@@ -1,0 +1,11 @@
+<p><%= @sender.name %>さんから、グループ 「<%= @group.name %>」のメンバーへメッセージが届いています。</p>
+
+<hr>
+
+<p><%= simple_format(@body) %></p>
+
+<hr>
+
+<p>
+  <%= link_to "グループページを見る", group_url(@group) %>
+</p>

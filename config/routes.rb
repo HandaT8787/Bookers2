@@ -15,6 +15,8 @@ Rails.application.routes.draw do
     resource :group_user, only:[:create, :destroy]
     member do
       patch :transfer_ownership
+      get :new_mail
+      post :send_mail
     end
   end
   get 'home/about', to: "homes#about"
