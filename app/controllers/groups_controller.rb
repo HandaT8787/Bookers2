@@ -23,7 +23,7 @@ class GroupsController < ApplicationController
 
     if @group.save
       @group.group_users.create(user: Current.user)
-      redirect_to @group
+      redirect_to groups_path
     else
       render :new, status: :unprocessable_entity
     end
