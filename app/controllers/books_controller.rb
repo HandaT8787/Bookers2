@@ -13,9 +13,19 @@ before_action :is_matching_login_user, only: [:edit, :update]
 
   def index
     condition = ["favorites.book_id = books.id AND favorites.created_at >= ?", 1.week.ago]
-    @books = Book.ranked_by_weekly_favorites
+    @books = case params[:sort]
+             when "score"
+                Book.order(score: :desc)
+             when "favorites"
+                Book.ranked_by_weekly_favorites
+             when "newest"
+                Book.order(created_at: :desc)
+             else
+                Book.order(:title)
+             end
     @new_book = Book.new
     @user = Current.user
+    @sort = params[:sort]
   end
 
   def show

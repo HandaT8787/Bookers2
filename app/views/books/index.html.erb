@@ -15,6 +15,16 @@
   
     <div class="col-md-8 offset-md-1">
       <h2>Books</h2>
+      <div>
+        <%= link_to "五十音順", books_path,
+              class: @sort.nil? ? "fw-bold text-dark" : "link-underline link-underline-opacity-0 link-underline-opacity-100-hover" %>|
+        <%= link_to "新しい順", books_path(sort: "newest"),
+              class: @sort == "newest" ? "fw-bold text-dark" : "link-underline link-underline-opacity-0 link-underline-opacity-100-hover" %>|
+        <%= link_to "評価の高い順", books_path(sort: "score"),
+              class: @sort == "score" ? "fw-bold text-dark" :  "link-underline link-underline-opacity-0 link-underline-opacity-100-hover" %>|
+        <%= link_to "週間いいね順", books_path(sort: "favorites"),
+              class: @sort == "favorites" ? "fw-bold text-dark" :  "link-underline link-underline-opacity-0 link-underline-opacity-100-hover" %>
+      </div>
       <table class="table table-hover table-borderless">
         <thead class="border-top">
           <tr class="border-2 border-top-0 border-end-0 border-start-0">
