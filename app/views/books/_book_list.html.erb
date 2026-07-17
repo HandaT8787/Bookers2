@@ -15,6 +15,14 @@
       <td class="p-2 px-3">
         閲覧数: <%= book.views.count %>
       </td>
+      <td class="p-2 px-3">
+        <div class="show_raty"
+            data-score="<%= book.score %>"
+            data-star-on="<%= asset_path('raty/star-on.png') %>"
+            data-star-off="<%= asset_path('raty/star-off.png') %>"
+            data-star-half="<%= asset_path('raty/star-half.png') %>">
+        </div>
+      </td>
     </tr>
   <% end %>
 </tbody>

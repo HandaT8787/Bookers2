@@ -46,6 +46,14 @@
       <%= f.label :body, "Opinion", class: "mb-2" %><br>
       <%= f.text_area :body, class: "rounded-1 border-1 border-secondary-subtle form-control" %>
     </div>
+    <div class="mb-3">
+      <label>Rate</label>
+      <div id="post_raty"
+            data-star-on="<%= asset_path('raty/star-on.png') %>"
+            data-star-off="<%= asset_path('raty/star-off.png') %>"
+            data-star-half="<%= asset_path('raty/star-half.png') %>">
+      </div>
+    </div>
     <div>
       <%= f.submit "Create Book", class: "btn btn-signup text-white rounded-1 fs-6" %>
     </div>

@@ -16,6 +16,12 @@
         <%= f.text_field :title, class: "border-1 border-secondary-subtle rounded-1 px-2 py-1 w-100 form-control" %><br>
         <%= f.label :body, "Opinion", class: "mb-2" %><br>
         <%= f.text_area :body, class: "border-1 border-secondary-subtle rounded-1 px-2 py-1 w-100 form-control mb-3" %>
+        <div class="show_raty mb-3"
+            data-score="<%= @book.score %>"
+            data-star-on="<%= asset_path('raty/star-on.png') %>"
+            data-star-off="<%= asset_path('raty/star-off.png') %>"
+            data-star-half="<%= asset_path('raty/star-half.png') %>">
+        </div>
         <%= f.submit "Update Book", class: "btn btn-signup text-white rounded-1 fs-6 mb-3" %><br>
         <%= link_to "Show", book_path(@book.id), class: "link-underline link-underline-opacity-0 link-underline-opacity-100-hover" %>
         <span>|</span>

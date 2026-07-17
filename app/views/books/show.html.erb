@@ -28,6 +28,14 @@
           <td>
             閲覧数: <%= @book.views.count %>
           </td>
+          <td>
+            <div class="show_raty"
+                data-score="<%= @book.score %>"
+                data-star-on="<%= asset_path('raty/star-on.png') %>"
+                data-star-off="<%= asset_path('raty/star-off.png') %>"
+                data-star-half="<%= asset_path('raty/star-half.png') %>">
+            </div>
+          </td>
           <% if @user == Current.user %>
             <td>
               <%= link_to "Edit", edit_book_path(@book.id), class: "btn btn-signup text-white rounded-1 px-2 py-1" %>
