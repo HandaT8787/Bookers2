@@ -6,9 +6,13 @@
     <thead class="border-top">
       <tr  class="border-2 border-top-0 border-end-0 border-start-0">
         <th></th>
-        <% if params[:search_type] == "book_title" %>
+        <% if params[:search_type] == "book_title" || params[:search_type] == "tag_name" %>
           <th class="fw-bold">Title</th>
           <th class="fw-bold">Opinion</th>
+          <th class="fw-bold">Tag</th>
+          <th></th>
+          <th></th>
+          <th></th>
         <% elsif params[:search_type] == "user_name" %>
           <th class="fw-bold">Name</th>
           <th class="fw-bold">Introduction</th>
@@ -18,7 +22,7 @@
     <tbody>
       <% @results.each do |result| %>
         <tr class="border-top">
-          <% if params[:search_type] == "book_title" %>
+          <% if params[:search_type] == "book_title" || parames[:search_type] == "tag_name" %>
             <td>
               <%= link_to user_path(result.user) do %>
                 <%= image_tag result.user.get_profile_image(50,50) %>
@@ -26,6 +30,21 @@
             </td>
             <td><%= link_to result.title, book_path(result) %></td>
             <td><%= result.body %></td>
+            <td>
+              <% if result.tag %>
+                <%= link_to result.tag.name, search_path(search_type: "tag_name", keyword: result.tag.name, match_type: "exact"), class: "link-underline link-underline-opacity-0 link-underline-opacity-100-hover" %>
+              <% end >
+            </td>
+            <%= render 'favorites/favorite', book: @book %>
+            <td>コメント数: <%= result.book_comments.count %></td>
+            <td>
+              <div class="show_raty"
+                data-score="<%= result.score %>"
+                data-star-on="<%= asset_path('raty/star-on.png') %>"
+                data-star-off="<%= asset_path('raty/star-off.png') %>"
+                data-star-half="<%= asset_path('raty/star-half.png') %>">
+              </div>
+            </td>
           <% elsif  params[:search_type] == "user_name" %>
             <td>
               <%= link_to user_path(result) do %>

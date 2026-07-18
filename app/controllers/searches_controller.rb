@@ -7,6 +7,8 @@ class SearchesController < ApplicationController
       @results = Book.where(title_condition(keyword))
     elsif params[:search_type] == "user_name"
       @results = User.where(name_condition(keyword))
+    elsif params[:search_type] == "tag_name"
+      @results = Book.joins(:tag).where(tag_condition(keyword))
     else
       @results = []
     end
@@ -20,6 +22,10 @@ class SearchesController < ApplicationController
 
   def name_condition(keyword)
     ["name #{like_operator} ?", formatted_keyword(keyword)]
+  end
+
+  def tag_condition(keyword)
+    ["tags.name #{like_operator} ?", formatted_keyword(keyword)]
   end
 
   def like_operator

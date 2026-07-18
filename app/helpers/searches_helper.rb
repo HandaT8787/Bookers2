@@ -1,5 +1,9 @@
 module SearchesHelper
   def search_target_label
-    params[:search_type] == "book_title" ? "Books" : "Users"
+    if params[:search_type] == "user_name"
+      "Users"
+    else
+      "Books"
+    end
   end
 end

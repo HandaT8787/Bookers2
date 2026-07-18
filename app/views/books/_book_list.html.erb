@@ -8,6 +8,11 @@
       </td>
       <td class="p-2 px-3"><%= link_to book.title, book_path(book.id), class: "link-underline link-underline-opacity-0 link-underline-opacity-100-hover" %></td>
       <td class="p-2 px-3"><%= book.body %></td>
+      <td class="p-2 px-3">
+        <% if book.tag %>
+          <%= link_to book.tag.name, search_path(search_type: "tag_name", keyword: book.tag.name, match_type: "exact"), class: "link-underline link-underline-opacity-0 link-underline-opacity-100-hover" %>
+        <% end %>
+      </td>
       <%= render 'favorites/favorite', book: book %>
       <td class="p-2 px-3">
         コメント数: <%= book.book_comments.count %>

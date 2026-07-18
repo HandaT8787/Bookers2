@@ -1,0 +1,8 @@
+<div class="d-flex justify-content-center mt-1">
+  <%= form_with url: search_path, method: :get, local: true do %>
+    <%= text_field_tag :keyword, params[:search_type] == "tag_name" ? params[:keyword] : nil %>
+    <%= hidden_field_tag :search_type, "tag_name" %>
+    <%= hidden_field_tag :match_type, "exact" %>
+    <%= submit_tag "タグ検索", class: "px-2" %>
+  <% end %>
+</div>

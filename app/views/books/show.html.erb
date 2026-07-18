@@ -21,6 +21,11 @@
           <td>
             <%= @book.body %>
           </td>
+          <td>
+            <% if @book.tag %>
+              <%= link_to @book.tag.name, search_path(search_type: "tag_name", keyword: @book.tag.name, match_type: "exact"), class: "link-underline link-underline-opacity-0 link-underline-opacity-100-hover" %>
+            <% end %>
+          </td>
           <%= render 'favorites/favorite', book: @book %>
           <td>
             コメント数: <%= @book.book_comments.count %>

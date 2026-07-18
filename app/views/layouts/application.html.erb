@@ -88,7 +88,10 @@
       </nav>
     </header>
     <% if authenticated? %>
-      <%= render 'searches/search_form' %>
+      <div class="d-flex justify-content-center gap-2">
+        <%= render 'searches/search_form' %>
+        <%= render 'searches/tag_search_form' %>
+      </div>
     <% end %>
     <%= yield %>
     <footer class="mt-5">

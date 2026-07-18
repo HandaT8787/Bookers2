@@ -19,6 +19,7 @@ Rails.application.routes.draw do
       post :send_mail
     end
   end
+
   get 'home/about', to: "homes#about"
   get "search", to: "searches#index"
   get "messages/:user_id", to: "messages#show", as: "conversation"
