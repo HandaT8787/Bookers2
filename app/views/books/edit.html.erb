@@ -22,6 +22,10 @@
             data-star-off="<%= asset_path('raty/star-off.png') %>"
             data-star-half="<%= asset_path('raty/star-half.png') %>">
         </div>
+        <div class="mb-3">
+          <%= label_tag :tag_name, "Tag", class: "mb-2" %>
+          <%= text_field_tag :tag_name, @book.tag&.name, class: "border-1 border-secondary-subtle rounded-1 px-2 py-1 w-100 form-control mb-3" %>
+        </div>
         <%= f.submit "Update Book", class: "btn btn-signup text-white rounded-1 fs-6 mb-3" %><br>
         <%= link_to "Show", book_path(@book.id), class: "link-underline link-underline-opacity-0 link-underline-opacity-100-hover" %>
         <span>|</span>

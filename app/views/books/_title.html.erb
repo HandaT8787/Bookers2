@@ -54,6 +54,10 @@
             data-star-half="<%= asset_path('raty/star-half.png') %>">
       </div>
     </div>
+    <div class="mb-3">
+      <%= label_tag :tag_name, "Tag", class: "mb-2" %>
+      <%= text_field_tag :tag_name, nil, class: "rounded-1 border-1 border-secondary-subtle form-control" %>
+    </div>
     <div>
       <%= f.submit "Create Book", class: "btn btn-signup text-white rounded-1 fs-6" %>
     </div>

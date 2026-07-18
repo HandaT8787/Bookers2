@@ -4,6 +4,12 @@ before_action :is_matching_login_user, only: [:edit, :update]
   def create
     @book = Book.new(book_params)
     @book.user_id = Current.user.id
+
+    if params[:tag_name].present?
+      tag = Tag.find_or_create_by(name: params[:tag_name])
+      @book.tag = tag
+    end
+
     if @book.save
       redirect_to book_path(@book.id), notice: "You have created book successfully."
     else
@@ -44,6 +50,12 @@ before_action :is_matching_login_user, only: [:edit, :update]
 
   def update
     @book = Book.find(params[:id])
+
+    if params[:tag_name].present?
+      tag = Tag.find_or_create_by(name: params[:tag_name])
+      @book.tag = tag
+    end
+    
     if @book.update(book_params)
       flash[:notice] = "You have updated book successfully."
       redirect_to book_path(@book.id)

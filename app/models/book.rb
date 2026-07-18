@@ -1,6 +1,7 @@
 class Book < ApplicationRecord
   has_one_attached :image
   belongs_to :user
+  belongs_to :tag, optional: true
   has_many :favorites, dependent: :destroy
   has_many :book_comments, dependent: :destroy
   has_many :views, dependent: :destroy
