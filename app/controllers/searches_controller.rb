@@ -1,50 +1,17 @@
 class SearchesController < ApplicationController
 
   def index
-    keyword = params[:keyword]
-
-    if params[:search_type] == "book_title"
-      @results = Book.where(title_condition(keyword))
-    elsif params[:search_type] == "user_name"
-      @results = User.where(name_condition(keyword))
-    elsif params[:search_type] == "tag_name"
-      @results = Book.joins(:tag).where(tag_condition(keyword))
+    @results = case params[:search_type]
+    when "book_title"
+      Book.search_for(params[:keyword], params[:match_type])
+    when "user_name"
+      User.search_for(params[:keyword], params[:match_type])
+    when "tag_name"
+      Book.search_by_tag(params[:keyword], params[:match_type])
     else
-      @results = []
+      []
     end
   end
 
-  private
-
-  def title_condition(keyword)
-    ["title #{like_operator} ?", formatted_keyword(keyword)]
-  end
-
-  def name_condition(keyword)
-    ["name #{like_operator} ?", formatted_keyword(keyword)]
-  end
-
-  def tag_condition(keyword)
-    ["tags.name #{like_operator} ?", formatted_keyword(keyword)]
-  end
-
-  def like_operator
-    params[:match_type] == "exact" ? "=" : "LIKE"
-  end
-
-  def formatted_keyword(keyword)
-    case params[:match_type]
-    when "exact"
-      keyword
-    when "prefix"
-      "#{keyword}%"
-    when "suffix"
-      "%#{keyword}"
-    when "partial"
-      "%#{keyword}%"
-    else
-      "%#{keyword}%"
-    end
-  end
 end
 

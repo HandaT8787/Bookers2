@@ -47,4 +47,17 @@ class User < ApplicationRecord
   def mutual_following?(other_user)
     following?(other_user) && other_user.following?(self)
   end
+
+  def self.search_for(keyword, method)
+    case method
+    when "exact"
+      where(name: keyword)
+    when "prefix"
+      where("name LIKE ?", "#{keyword}%")
+    when "suffix"
+      where("name LIKE ?", "%#{keyword}")
+    else
+      where("name LIKE ?", "%#{keyword}%")
+    end
+  end
 end

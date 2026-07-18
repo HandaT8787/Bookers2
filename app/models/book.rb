@@ -22,4 +22,31 @@ class Book < ApplicationRecord
       .select("books.*, COUNT(favorites.id) AS favorites_count_this_week")
       .order("favorites_count_this_week DESC")
   end
+
+  def self.search_for(keyword, method)
+    case method
+    when "exact"
+      where(title: keyword)
+    when "prefix"
+      where("title LIKE ?", "#{keyword}%")
+    when "suffix"
+      where("title LIKE ?", "%#{keyword}")
+    else
+      where("title LIKE ?", "%#{keyword}%")
+    end
+  end
+  
+  def self.search_by_tag(keyword, method)
+    condition = case method
+                when "exact"
+                  keyword
+                when "prefix"
+                  "#{keyword}%"
+                when "suffix"
+                  "%#{keyword}"
+                else
+                  "%#{keyword}%"
+                end
+    joins(:tag).where("tags.name LIKE ?",condition)
+  end
 end

@@ -1,0 +1,17 @@
+<%= form_with model: group do |f| %>
+  <%= render 'layouts/errors', obj: group %>
+  <div class="mb-3">
+    <%= f.label :name, "グループ名", class: "mb-2" %>
+    <%= f.text_field :name, class: "form-control" %>
+  </div>
+  <div class="mb-3">
+    <%= f.label :introduction, "紹介文", class: "mb-2" %>
+    <%= f.text_area :introduction, class: "form-control" %>
+  </div>
+  <div class="mb-3">
+    <%= f.label :group_image, "グループ画像", class: "mb-2" %><br>
+    <%= f.file_field :group_image, accept: "image/*" %>
+  </div>
+
+  <%= f.submit group.persisted? ? "Update Group" : "Create Group", class: "btn btn-login text-white" %>
+<% end %>
