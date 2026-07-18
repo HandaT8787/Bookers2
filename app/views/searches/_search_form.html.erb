@@ -1,6 +1,6 @@
 <div class="d-flex justify-content-center mt-1">
   <%= form_with url: search_path, method: :get, local: true do %>
-    <%= text_field_tag :keyword, params[:keyword] %>
+    <%= text_field_tag :keyword, nil %>
     <%= select_tag :search_type, options_for_select([["User", "user_name"], ["Book", "book_title"]], params[:search_type]) %>
     <%= select_tag :match_type, options_for_select([["完全一致", "exact"], ["前方一致", "prefix"], ["後方一致", "suffix"], ["部分一致", "partial"]], params[:match_type]) %>
     <%= submit_tag "検索", class: "px-2"%>

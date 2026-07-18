@@ -37,9 +37,20 @@ before_action :is_matching_login_user, only: [:edit, :update]
   def show
     @book = Book.find(params[:id])
     @user = @book.user
-    @books = @user.books
     @new_book = Book.new
     @book_comment = BookComment.new
+    @sort = params[:sort]
+
+    @books = case params[:sort]
+             when "score"
+                @user.books.order(score: :desc)
+             when "facorites"
+                @user.books.merge(Book.ranked_by_weekly_favorites)
+             when "newest"
+                @user.books.order(created_at: :desc)
+             else
+                @user.books.order(:title)
+             end
 
     @book.views.create
   end

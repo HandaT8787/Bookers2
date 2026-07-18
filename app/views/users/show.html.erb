@@ -13,6 +13,9 @@
             <th></th>
             <th class="fw-bold">Title</th>
             <th class="fw-bold">Opinion</th>
+            <th class="fw-bold">Tag</th>
+            <th></th>
+            <th></th>
             <th></th>
           </tr>
         </thead>
@@ -26,7 +29,21 @@
               </td>
               <td class="border-top"><%= link_to book.title, book_path(book.id), class: "link-underline link-underline-opacity-0 link-underline-opacity-100-hover" %></td>
               <td class="border-top"><%= book.body %></td>
+              <td class="border-top">
+                <% if book.tag %>
+                  <%= link_to book.tag.name, search_path(search_type: "tag_name", keyword: book.tag.name, match_type: "exact"), class: "link-underline link-underline-opacity-0 link-underline-opacity-100-hover" %>
+                <% end %>
+              </td>
+              <%= render 'favorites/favorite', book: book %>
               <td class="border-top">コメント数: <%= book.book_comments.count %></td>
+              <td>
+                <div class="show_raty"
+                  data-score="<%= book.score %>"
+                  data-star-on="<%= asset_path('raty/star-on.png') %>"
+                  data-star-off="<%= asset_path('raty/star-off.png') %>"
+                  data-star-half="<%= asset_path('raty/star-half.png') %>">
+                </div>
+              </td>
             </tr>
           <% end %>
         </tbody>

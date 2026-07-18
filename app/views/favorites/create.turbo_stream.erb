@@ -1,3 +1,7 @@
+<%= turbo_stream.replace dom_id(@book, :favorite) do %>
+  <%= render 'favorites/favorite', book: @book %>
+<% end %>
+
 <%= turbo_stream.replace "books_list" do %>
   <%= render 'books/book_list', books: @books %>
 <% end %>
