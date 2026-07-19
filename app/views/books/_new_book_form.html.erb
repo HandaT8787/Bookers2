@@ -1,0 +1,26 @@
+<h2 class="mt-4">New book</h2>
+<%= form_with model: new_book, url: books_path do |f| %>
+  <div class="mb-2">
+    <%= f.label :title, class: "mb-2" %><br>
+    <%= f.text_field :title, class: "rounded-1 border-1 border-secondary-subtle form-control" %>
+  </div>
+  <div class="mb-3">
+    <%= f.label :body, "Opinion", class: "mb-2" %><br>
+    <%= f.text_area :body, class: "rounded-1 border-1 border-secondary-subtle form-control" %>
+  </div>
+  <div class="mb-3">
+    <%= label_tag :tag_name, "Tag", class: "mb-2" %>
+    <%= text_field_tag :tag_name, nil, class: "rounded-1 border-1 border-secondary-subtle form-control" %>
+  </div>
+  <div class="mb-3">
+    <label>Rate</label>
+    <div id="post_raty"
+          data-star-on="<%= asset_path('raty/star-on.png') %>"
+          data-star-off="<%= asset_path('raty/star-off.png') %>"
+          data-star-half="<%= asset_path('raty/star-half.png') %>">
+    </div>
+  </div>
+  <div>
+    <%= f.submit "Create Book", class: "btn button--signup text-white rounded-1 fs-6" %>
+  </div>
+<% end %>

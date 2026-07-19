@@ -27,16 +27,16 @@
             </td>
             <td class="p-3">
               <% if @group.owner == Current.user %>
-                <%= link_to "Edit", edit_group_path(@group), class: "btn btn-signup text-white rounded-1" %>
+                <%= link_to "Edit", edit_group_path(@group), class: "btn button--signup text-white rounded-1" %>
               <% elsif @group.members.include?(Current.user) %>
                 <%= link_to "Leave this group", group_group_user_path(@group), data: { turbo_method: :delete }, class: "btn btn-danger" %>
               <% else %>
-                <%= link_to "Join this group", group_group_user_path(@group), data: { turbo_method: :post }, class: "btn btn-signup text-white rounded-1" %>
+                <%= link_to "Join this group", group_group_user_path(@group), data: { turbo_method: :post }, class: "btn button--signup text-white rounded-1" %>
               <% end %>
             </td>
             <td class="p-3">
               <% if @group.owner == Current.user %>
-                <%= link_to "Notice an Event", new_mail_group_path(@group), class: "btn btn-login text-white rounded-1" %>
+                <%= link_to "Notice an Event", new_mail_group_path(@group), class: "btn button--login text-white rounded-1" %>
               <% end %>
             </td>
           </tr>

@@ -1,10 +1,10 @@
 <td class="p-2 px-3" id="<%= dom_id(book, :favorite) %>">
   <% if book.favorited_by?(Current.user) %>
-    <%= link_to book_favorite_path(book), data: { turbo_method: :delete}, class: "link-underline link-underline-opacity-0 link-underline-opacity-100-hover good" do %>
+    <%= link_to book_favorite_path(book), data: { turbo_method: :delete}, class: "link-underline link-underline-opacity-0 link-underline-opacity-100-hover favorite favorite--active" do %>
       ♥<%= book.favorites.count %>
     <% end %>
   <% else %>
-    <%= link_to book_favorite_path(book), data: { turbo_method: "post" }, class: "link-underline link-underline-opacity-0 link-underline-opacity-100-hover" do %>
+    <%= link_to book_favorite_path(book), data: { turbo_method: "post" }, class: "link-underline link-underline-opacity-0 link-underline-opacity-100-hover favorite" do %>
       ♥<%= book.favorites.count %>
     <% end %>
   <% end %>

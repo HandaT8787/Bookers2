@@ -27,7 +27,7 @@
                 <td class="p-3"><%= group.members.count %></td>
                 <td class="p-3">
                   <% if group.owner == Current.user %>
-                    <%= link_to "Edit", edit_group_path(group), class: "btn btn-signup text-white rounded-1 px-2 py-1" %>
+                    <%= link_to "Edit", edit_group_path(group), class: "btn button--signup text-white rounded-1 px-2 py-1" %>
                   <% end %>
                 </td>
               </tr>

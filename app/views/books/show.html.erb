@@ -17,7 +17,7 @@
         <%= link_to "週間いいね順", books_path(@book, sort: "favorites"),
               class: @sort == "favorites" ? "fw-bold text-dark" :  "link-underline link-underline-opacity-0 link-underline-opacity-100-hover" %>
       </div>
-      <table class="table table-borderless table-fixed">
+      <table class="table table-borderless">
         <tr class="border-top">
           <td>
             <%= link_to user_path(@book.user), class: "link-underline link-underline-opacity-0 link-underline-opacity-100-hover" do %>
@@ -53,7 +53,7 @@
           </td>
           <% if @user == Current.user %>
             <td>
-              <%= link_to "Edit", edit_book_path(@book.id), class: "btn btn-signup text-white rounded-1 px-2 py-1" %>
+              <%= link_to "Edit", edit_book_path(@book.id), class: "btn button--signup text-white rounded-1 px-2 py-1" %>
             </td>
             <td>
               <%= link_to "Destroy", book_path(@book), data: { turbo_method: :delete, turbo_confirm: "本当に消しますか？"}, class: "btn btn-danger text-white rounded-1 px-2 py-1" %>

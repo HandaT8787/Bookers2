@@ -7,7 +7,7 @@
     <% if Current.user.following?(user) %>
       <%= button_to "フォロー外す", relationship_path(Current.user.active_relationships.find_by(followed_id: user.id)), method: :delete, class: "btn btn-info text-white" %>
     <% else %>
-      <%= button_to "フォローする", relationships_path(followed_id: user.id), method: :post, class: "btn btn-success btn-signup" %>
+      <%= button_to "フォローする", relationships_path(followed_id: user.id), method: :post, class: "btn btn-success button--signup" %>
     <% end %>
 
     <% if Current.user.mutual_following?(user) %>

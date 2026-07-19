@@ -9,7 +9,7 @@
  * Consider organizing styles into separate files for maintainability.
  */
 
- * {
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -17,10 +17,10 @@
 
 .navbar-dark .navbar-nav .nav-link {
   color: white !important;
-}
 
-.navbar-dark .navbar-nav .nav-link:hover {
-  color: rgba(255, 255, 255, 0.8) !important;
+  &:hover {
+    color: rgba(255, 255, 255, 0.8) !important;
+  }
 }
 
 h1 {
@@ -40,30 +40,38 @@ p {
   font-size: 14px !important;
 }
 
-.btn-signup {
-  background-color: #47b347 !important;
-  border-color: #47b347 !important;
+// Block: .button / Modifiers: --signup, --login
+.button {
+  &--signup {
+    background-color: #47b347 !important;
+    border-color: #47b347 !important;
+
+    &:hover {
+      background-color: green !important;
+      border-color: green !important;
+    }
+  }
+
+  &--login {
+    background-color: #47a1b3 !important;
+    border-color: #47a1b3 !important;
+
+    &:hover {
+      background-color: darkcyan !important;
+      border-color: darkcyan !important;
+    }
+  }
 }
 
-.btn-signup:hover {
-  background-color: green !important;
-  border-color: green !important;
+// Block: .form / Element: __hint
+.form {
+  &__hint {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
 }
 
-.btn-login {
-  background-color: #47a1b3 !important;
-border-color: #47a1b3 !important;
-}
-
-.btn-login:hover {
-  background-color: darkcyan !important;
-  border-color: darkcyan !important;
-}
-
-.p-text {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-.good {
-  color: red;
+.favorite {
+  &--active {
+    color: red;
+  }
 }

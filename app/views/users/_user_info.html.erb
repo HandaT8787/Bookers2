@@ -1,0 +1,25 @@
+  <h2>User info</h2>
+  <%= image_tag user.get_profile_image(100,100) %>
+  <table class="table table-borderless">
+    <tr class="border-top">
+      <th class="py-3">name</th>
+      <td class="fw-bold py-3"><%= user.name %></td>
+    </tr>
+    <tr class="border-top">
+      <th class="py-3">introduction</th>
+      <td class="fw-bold py-3"><%= user.introduction %></td>
+    </tr>
+    <tr class="border-top">
+      <th class="py-3">follows</th>
+      <td class="fw-bold py-3">
+        <%= link_to "#{user.following.count}", following_user_path(user), class: "link-underline link-underline-opacity-0 link-underline-opacity-100-hover" %>
+      </td>
+    </tr>
+    <tr class="border-top">
+      <th class="py-3">followers</th>
+      <td class="fw-bold py-3">
+        <%= link_to "#{user.followers.count}", followers_user_path(user), class: "link-underline link-underline-opacity-0 link-underline-opacity-100-hover" %>
+      </td>
+    </tr>
+  </table>
+  <%= render 'users/follow_form', user: user %>
