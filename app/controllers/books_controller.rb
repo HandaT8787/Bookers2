@@ -1,5 +1,5 @@
 class BooksController < ApplicationController
-before_action :is_matching_login_user, only: [:edit, :update]
+before_action :is_matching_login_user, only: [ :edit, :update ]
 
   def create
     @book = Book.new(book_params)
@@ -18,17 +18,17 @@ before_action :is_matching_login_user, only: [:edit, :update]
   end
 
   def index
-    condition = ["favorites.book_id = books.id AND favorites.created_at >= ?", 1.week.ago]
+    condition = [ "favorites.book_id = books.id AND favorites.created_at >= ?", 1.week.ago ]
     @books = case params[:sort]
-             when "score"
+    when "score"
                 Book.order(score: :desc)
-             when "favorites"
+    when "favorites"
                 Book.ranked_by_weekly_favorites
-             when "newest"
+    when "newest"
                 Book.order(created_at: :desc)
-             else
+    else
                 Book.order(:title)
-             end
+    end
     @new_book = Book.new
     @user = Current.user
     @sort = params[:sort]
@@ -42,15 +42,15 @@ before_action :is_matching_login_user, only: [:edit, :update]
     @sort = params[:sort]
 
     @books = case params[:sort]
-             when "score"
+    when "score"
                 @user.books.order(score: :desc)
-             when "facorites"
+    when "facorites"
                 @user.books.merge(Book.ranked_by_weekly_favorites)
-             when "newest"
+    when "newest"
                 @user.books.order(created_at: :desc)
-             else
+    else
                 @user.books.order(:title)
-             end
+    end
 
     @book.views.create
   end
@@ -66,7 +66,7 @@ before_action :is_matching_login_user, only: [:edit, :update]
       tag = Tag.find_or_create_by(name: params[:tag_name])
       @book.tag = tag
     end
-    
+
     if @book.update(book_params)
       flash[:notice] = "You have updated book successfully."
       redirect_to book_path(@book.id)
@@ -93,5 +93,4 @@ before_action :is_matching_login_user, only: [:edit, :update]
       redirect_to books_path
     end
   end
-
 end

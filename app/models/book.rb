@@ -15,7 +15,7 @@ class Book < ApplicationRecord
   end
 
   def self.ranked_by_weekly_favorites
-    condition = ["favorites.book_id = books.id AND favorites.created_at >= ?", 1.week.ago]
+    condition = [ "favorites.book_id = books.id AND favorites.created_at >= ?", 1.week.ago ]
     includes(:user)
       .joins("LEFT JOIN favorites ON #{sanitize_sql_array(condition)}")
       .group("books.id")
@@ -35,18 +35,18 @@ class Book < ApplicationRecord
       where("title LIKE ?", "%#{keyword}%")
     end
   end
-  
+
   def self.search_by_tag(keyword, method)
     condition = case method
-                when "exact"
+    when "exact"
                   keyword
-                when "prefix"
+    when "prefix"
                   "#{keyword}%"
-                when "suffix"
+    when "suffix"
                   "%#{keyword}"
-                else
+    else
                   "%#{keyword}%"
-                end
-    joins(:tag).where("tags.name LIKE ?",condition)
+    end
+    joins(:tag).where("tags.name LIKE ?", condition)
   end
 end

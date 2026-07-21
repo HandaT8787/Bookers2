@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-  allow_unauthenticated_access only: [:new, :create]
-  before_action :is_matching_login_user, only: [:edit, :update]
+  allow_unauthenticated_access only: [ :new, :create ]
+  before_action :is_matching_login_user, only: [ :edit, :update ]
 
   def new
     @user = User.new
@@ -31,7 +31,7 @@ class UsersController < ApplicationController
                   .group("DATE(created_at)")
                   .count
     @daily_counts = (6.days.ago.to_date..Date.current).map do |date|
-      [date, counts[date.to_s] || counts[date] || 0]
+      [ date, counts[date.to_s] || counts[date] || 0 ]
     end
 
     if params[:date].present?
@@ -88,5 +88,4 @@ class UsersController < ApplicationController
     return nil if previous.zero?
     (current / previous * 100).round(1)
   end
-
 end

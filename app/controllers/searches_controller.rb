@@ -1,5 +1,4 @@
 class SearchesController < ApplicationController
-
   def index
     @results = case params[:search_type]
     when "book_title"
@@ -12,6 +11,4 @@ class SearchesController < ApplicationController
       []
     end
   end
-
 end
-

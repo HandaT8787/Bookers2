@@ -1,5 +1,4 @@
 class MessagesController < ApplicationController
-
   def show
     @partner = User.find(params[:user_id])
     @messages = Message.conversation_between(Current.user, @partner)
@@ -23,5 +22,4 @@ class MessagesController < ApplicationController
   def message_params
     params.require(:message).permit(:content, :recipient_id)
   end
-
 end

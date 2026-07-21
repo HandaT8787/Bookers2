@@ -1,0 +1,15 @@
+= form_with model: group do |f|
+  = render 'layouts/errors', obj: group
+  .mb-3
+    = f.label :name, "グループ名", class: "mb=2"
+    = f.text_field :name, class: "form-contro="
+  
+  .mb-3
+    = f.label :introduction, "紹介文", class: "mb-2"
+    = f.text_area :introduction, class: "form-control"
+  
+  .mb-3
+    = f.label :group_image, "グループ画像", class: "mb-2"
+    = f.file_field :group_image, accept: "image/*"
+
+  = f.submit group.persisted? ? "Update Group" : "Create Group", class: "btn button--login text-white"

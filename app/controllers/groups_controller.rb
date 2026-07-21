@@ -1,6 +1,6 @@
 class GroupsController < ApplicationController
-  before_action :set_group, only: [:show, :edit, :update, :destroy, :transfer_ownership, :new_mail, :send_mail]
-  before_action :ensure_owner, only: [:edit, :update, :destroy, :transfer_ownership, :new_mail, :send_mail]
+  before_action :set_group, only: [ :show, :edit, :update, :destroy, :transfer_ownership, :new_mail, :send_mail ]
+  before_action :ensure_owner, only: [ :edit, :update, :destroy, :transfer_ownership, :new_mail, :send_mail ]
 
   def index
     @groups = Group.all
@@ -71,7 +71,7 @@ class GroupsController < ApplicationController
 
     GroupMailer.bulk_mail(@group, Current.user, @subject, @body).deliver_now
 
-    render :send_mail, formats: [:html]
+    render :send_mail, formats: [ :html ]
   end
 
   private

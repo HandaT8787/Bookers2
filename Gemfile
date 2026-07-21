@@ -59,13 +59,15 @@ group :development do
 end
 
 group :test do
-  gem 'capybara', '>= 2.15'
-    gem 'rspec-rails'
+  gem "capybara", ">= 2.15"
+    gem "rspec-rails"
     gem "factory_bot_rails"
-    gem 'faker'
+    gem "faker"
 end
 
-gem 'net-smtp'
+gem "net-smtp"
+
+gem "slim-rails"
 
 group :development, :test do
   gem "dotenv-rails"

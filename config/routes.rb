@@ -1,18 +1,18 @@
 Rails.application.routes.draw do
   resource :session
-  resources :users, only: [:new, :create, :index, :show, :edit, :update], path_names: {new: 'sign_up'} do
+  resources :users, only: [ :new, :create, :index, :show, :edit, :update ], path_names: { new: "sign_up" } do
     member do
       get :following, :followers
     end
   end
   resources :books do
-    resource :favorite, only: [:create, :destroy]
-    resources :book_comments, only: [:create, :destroy]
+    resource :favorite, only: [ :create, :destroy ]
+    resources :book_comments, only: [ :create, :destroy ]
   end
-  resources :relationships, only: [:create, :destroy]
-  resources :messages, only: [:create]
+  resources :relationships, only: [ :create, :destroy ]
+  resources :messages, only: [ :create ]
   resources :groups do
-    resource :group_user, only:[:create, :destroy]
+    resource :group_user, only: [ :create, :destroy ]
     member do
       patch :transfer_ownership
       get :new_mail
@@ -20,7 +20,7 @@ Rails.application.routes.draw do
     end
   end
 
-  get 'home/about', to: "homes#about"
+  get "home/about", to: "homes#about"
   get "search", to: "searches#index"
   get "messages/:user_id", to: "messages#show", as: "conversation"
 

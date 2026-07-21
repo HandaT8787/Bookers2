@@ -1,5 +1,4 @@
 class GroupUsersController < ApplicationController
-
   def create
     @group = Group.find(params[:group_id])
     @group.group_users.create(user: Current.user)
@@ -13,10 +12,9 @@ class GroupUsersController < ApplicationController
       redirect_to @group, alert: "グループオーナーは退会できません。グループを削除するか、オーナーを譲渡してください。"
       return
     end
-    
+
     group_user = @group.group_users.find_by(user: Current.user)
     group_user&.destroy
     redirect_to groups_path
   end
-
 end
