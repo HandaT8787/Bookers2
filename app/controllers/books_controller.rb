@@ -44,7 +44,7 @@ before_action :is_matching_login_user, only: [ :edit, :update ]
     @books = case params[:sort]
     when "score"
                 @user.books.order(score: :desc)
-    when "facorites"
+    when "favorites"
                 @user.books.merge(Book.ranked_by_weekly_favorites)
     when "newest"
                 @user.books.order(created_at: :desc)
