@@ -23,6 +23,7 @@ Rails.application.routes.draw do
   get "home/about", to: "homes#about"
   get "search", to: "searches#index"
   get "messages/:user_id", to: "messages#show", as: "conversation"
+  post "guest_sign_in", to: "guest_sessions#create", as: :guest_sign_in
 
   resources :passwords, param: :token
   root "homes#index"

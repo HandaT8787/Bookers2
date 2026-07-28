@@ -1,7 +1,9 @@
 <div id="follow_form" class="d-flex gap-4 justify-content-center align-items-center">
   <% if Current.user == user %>
-    <%= link_to edit_user_path(@user.id), class: "btn btn-outline-secondary w-100 mx-n2" do %>
-      <i class="fa-solid fa-user-gear"></i>
+    <% unless user.guest_user? %>
+      <%= link_to edit_user_path(@user.id), class: "btn btn-outline-secondary w-100 mx-n2" do %>
+        <i class="fa-solid fa-user-gear"></i>
+      <% end %>
     <% end %>
   <% else %>
     <% if Current.user.following?(user) %>
@@ -10,7 +12,7 @@
       <%= button_to "フォローする", relationships_path(followed_id: user.id), method: :post, class: "btn btn-success button--signup" %>
     <% end %>
 
-    <% if Current.user.mutual_following?(user) %>
+    <% if Current.user.mutual_following?(user) && !Current.user.guest_user? %>
       <%= link_to "chatを始める", conversation_path(user), class: "link-underline link-underline-opacity-0 link-underline-opacity-100-hover" %>
     <% end %>
   <% end %>

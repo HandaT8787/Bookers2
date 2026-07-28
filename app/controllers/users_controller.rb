@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   allow_unauthenticated_access only: [ :new, :create ]
   before_action :is_matching_login_user, only: [ :edit, :update ]
+  before_action :ensure_guest_user, only: [ :edit ]
 
   def new
     @user = User.new
@@ -87,5 +88,12 @@ class UsersController < ApplicationController
   def calc_percentage(current, previous)
     return nil if previous.zero?
     (current / previous * 100).round(1)
+  end
+
+  def ensure_guest_user
+    @user = User.find(params[:id])
+    if @user.guest_user?
+      redirect_to user_path(Current.user), notice: "ゲストユーザーはプロフィール編集画面へ遷移できません。"
+    end
   end
 end

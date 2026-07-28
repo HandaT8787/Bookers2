@@ -10,6 +10,9 @@
     about various books!
   </p>
   <div class="d-grid gap-2 col-10 mx-auto pt-2">
+    <div class="row">
+      <%= button_to "ゲストログイン（閲覧用）", guest_sign_in_path, class: "btn btn-secondary w-100 rounded-1 p-1 mb-2 text-decoration-none text-white" %>
+    </div>
     <%= link_to "Log in", new_session_path, class: "btn btn-info button--login rounded-1 p-1 mb-2 text-decoration-none text-white" %>
     <%= link_to "Sign up", new_user_path, class: "btn btn-success button--signup rounded-1 p-1 text-decoration-none text-white" %>
   </div>
