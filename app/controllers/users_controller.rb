@@ -18,14 +18,14 @@ class UsersController < ApplicationController
   end
 
   def index
-    @users = User.all
+    @users = User.all.with_attached_profile_image
     @user = Current.user
     @new_book = Book.new
   end
 
   def show
     @user = User.find(params[:id])
-    @books = @user.books
+    @books = @user.books.includes(:tag)
     @new_book = Book.new
     counts = @user.books
                   .where(created_at: 6.days.ago.beginning_of_day..Time.current)

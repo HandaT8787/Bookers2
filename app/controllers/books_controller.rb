@@ -21,13 +21,13 @@ before_action :is_matching_login_user, only: [ :edit, :update ]
     condition = [ "favorites.book_id = books.id AND favorites.created_at >= ?", 1.week.ago ]
     @books = case params[:sort]
     when "score"
-                Book.order(score: :desc)
+                Book.includes(:tag, user: :profile_image_attachment).order(score: :desc)
     when "favorites"
-                Book.ranked_by_weekly_favorites
+                Book.includes(:tag, user: :profile_image_attachment).ranked_by_weekly_favorites
     when "newest"
-                Book.order(created_at: :desc)
+                Book.includes(:tag, user: :profile_image_attachment).order(created_at: :desc)
     else
-                Book.order(:title)
+                Book.includes(:tag, user: :profile_image_attachment).order(:title)
     end
     @new_book = Book.new
     @user = Current.user

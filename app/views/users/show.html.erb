@@ -1,3 +1,4 @@
+
 <%= tag.div(flash[:alert]) if flash[:alert] %>
 <%= tag.div(flash[:notice]) if flash[:notice] %>
 
@@ -35,8 +36,8 @@
                 <% end %>
               </td>
               <%= render 'favorites/favorite', book: book %>
-              <td class="border-top">コメント数: <%= book.book_comments.count %></td>
-              <td>
+              <td class="border-top">コメント数: <%= book.book_comments_count %></td>
+              <td class="border-top">
                 <div class="show_raty"
                   data-score="<%= book.score %>"
                   data-star-on="<%= asset_path('raty/star-on.png') %>"

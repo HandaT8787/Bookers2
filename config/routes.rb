@@ -19,6 +19,7 @@ Rails.application.routes.draw do
       post :send_mail
     end
   end
+  resources :notifications, only: [:update]
 
   get "home/about", to: "homes#about"
   get "search", to: "searches#index"
