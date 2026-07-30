@@ -8,9 +8,21 @@ class Book < ApplicationRecord
   has_many :notifications, as: :notifiable, dependent: :destroy
 
   after_create do
-    user.followers.each do |follower|
-      notifications.create(user_id: follower.id)
+    follower_ids = user.followers.pluck(:id)
+    return if follower_ids.empty?
+
+    notification_records = follower_ids.map do |follower_id|
+      {
+        user_id: follower_id,
+        notifiable_type: "Book",
+        notifiable_id: id,
+        read: false,
+        created_at: Time.current,
+        updated_at: Time.current
+      }
     end
+
+    Notification.insert_all(notification_records)
   end
 
   validates :title, presence: true
@@ -54,5 +66,13 @@ class Book < ApplicationRecord
                   "%#{keyword}%"
     end
     joins(:tag).where("tags.name LIKE ?", condition)
+  end
+
+  def notification_message
+    "フォローしている#{user.name}さんが#{title}を投稿しました"
+  end
+
+  def notification_redirect_path
+    Rails.application.routes.url_helpers.book_path(self)
   end
 end

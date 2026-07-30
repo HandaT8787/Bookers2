@@ -21,4 +21,8 @@ document.addEventListener("turbo:load", () => {
       starHalf: elem.dataset.starHalf
     }).init();
   });
+
+  document.querySelectorAll('[data-bs-toggle="dropdown"]').forEach((el) => {
+    new bootstrap.Dropdown(el);
+  });
 });
